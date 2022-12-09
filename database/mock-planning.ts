@@ -6,5 +6,11 @@ export const plannings: planningTypes[] = [
         date_debut_planning: new Date(),
         nom_planning: "courant",
         activiteId: 1
+    },
+    {
+        duree_validite_calendrier: 6,
+        date_debut_planning: new Date(),
+        nom_planning: "courant",
+        activiteId: 1
     }
 ];

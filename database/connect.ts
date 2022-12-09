@@ -76,7 +76,6 @@ Token.belongsTo(User, { onDelete: 'cascade', hooks: true })
 Localisation.hasOne(User, { onDelete: 'cascade', hooks: true })
 User.belongsTo(Localisation, { onDelete: 'cascade', hooks: true })
 
-
 User.hasOne(RendezVous, { onDelete: 'cascade', hooks: true })
 RendezVous.belongsTo(User, { onDelete: 'cascade', hooks: true })
 
@@ -106,12 +105,11 @@ Activity.belongsToMany(User, {through: activityUsers })
 User.belongsToMany(Activity, {through: activityUsers })
 
 export const initDb = () => {
-    return sequelize.sync({ force: true }).then(() => {
-
+    return sequelize.sync({force: true}).then(() => {
         roles.map((role: roleTypes) => {
-            Role.create({
+            Role.create({   
                 role: role.role
-            })
+            }).then((response: { toJSON: () => string }) => console.log(response.toJSON()))
         })
 
         localisations.map((localisation: localisationTypes) => {
@@ -120,7 +118,7 @@ export const initDb = () => {
                 code_postal: localisation.code_postal,
                 ville: localisation.ville,
                 numero_de_rue: localisation.numero_de_rue
-            })
+            }).then((response: { toJSON: () => string }) => console.log(response.toJSON()))
         })
 
         users.map((user: userTypes, index: number) => {
@@ -136,8 +134,6 @@ export const initDb = () => {
             })
         })
 
-
-
         activities.map((activity: activityTypes) => {
             Activity.create({
                 fonction: activity.fonction,
@@ -145,7 +141,14 @@ export const initDb = () => {
                 type: activity.type,
                 estActive: activity.estActif,
                 localisationId : activity.localisationId
-            })
+            }).then((response: { toJSON: () => string }) => console.log(response.toJSON()))
+        })
+
+        tokens.map((token: tokenTypes) => {
+            Token.create({
+                refreshToken: token.refreshToken,
+                utilisateurId: token.UserId
+            }).then((response: { toJSON: () => string }) => console.log(response.toJSON()))
         })
 
         plannings.map((planning: planningTypes) => {
@@ -154,24 +157,16 @@ export const initDb = () => {
                 date_debut_planning: planning.date_debut_planning,
                 nom_planning: planning.nom_planning,
                 activiteId: planning.activiteId
+            }).then((response: { toJSON: () => string }) => {console.log(response.toJSON())
+                mockRendezVous.map((rendezVous: rendezVousTypes) => {
+                    RendezVous.create({
+                        planningId: rendezVous.planningId,
+                        utilisateurId: rendezVous.utilisateurId,
+                        date_rendez_vous: rendezVous.date_rendez_vous,
+                        duree_rendez_vous: rendezVous.duree_rendez_vous
+                    }).then((response: { toJSON: () => string }) => console.log(response.toJSON()))
+                })
             })
-        })
-
-        tokens.map((token: tokenTypes) => {
-            Token.create({
-                refreshToken: token.refreshToken,
-                utilisateurId: token.UserId
-            })
-        })
-
-        
-        mockRendezVous.map((rendezVous: rendezVousTypes) => {
-            RendezVous.create({
-                planningId: rendezVous.planningId,
-                // utilisateurId: rendezVous.utilisateurId,
-                date_rendez_vous: rendezVous.date_rendez_vous,
-                duree_rendez_vous: rendezVous.duree_rendez_vous
-            }).then((response: { toJSON: () => string }) => console.log(response.toJSON()))
         })
 
         console.log('Database created')
