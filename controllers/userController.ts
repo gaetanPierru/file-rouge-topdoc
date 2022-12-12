@@ -48,23 +48,7 @@ usersController.get("/", handler.getUsers)
   *        200:
   *          description: Create a new user.
   */
-usersController.post("/", async (req, res) => {
-
-    if (!req.body.password) return res.status(400).json({ passwordRequired: true, message: 'Password is required.' })
-
-    req.body.password = await bcrypt.hash(req.body.password, 10);
-    User.create(req.body).then((user: userTypes) => {
-        const message: string = `Utilisateur créé avec succes.`;
-        res.json({ message, data: user });
-    })
-        .catch((error: ApiException) => {
-            if (error instanceof ValidationError) {
-                return res.status(400).json({ message: error.message, data: error })
-            }
-            const message = `Echec Utilisateur non créé.`
-            res.status(500).json({ message, data: error })
-        })
-})
+usersController.post("/", handler.postUser)
 
 /**
   * @openapi

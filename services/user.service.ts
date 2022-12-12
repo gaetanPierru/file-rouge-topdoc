@@ -1,5 +1,6 @@
 import { userDTO } from "../DTO/user.dto";
 import { IRepository } from "../repository/core/repository.interface";
+import { userId, userTypes } from "../types/user";
 
 export class UserService {
     private userRepository: IRepository<userDTO>;
@@ -17,6 +18,13 @@ export class UserService {
 
     async findAll(): Promise<userDTO[] | null> {
         return this.userRepository.findAll().then(userDTO => {
+            if(userDTO === null) return null;
+            return userDTO
+        })
+    }
+
+    async create(user: userTypes): Promise<userDTO | null> {
+        return this.userRepository.create(user).then(userDTO => {
             if(userDTO === null) return null;
             return userDTO
         })
