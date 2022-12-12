@@ -6,7 +6,7 @@ import { apiController } from './controllers/apiController';
 import { initDb } from './database/connect';
 const express = require("express")
 import cors from 'cors';
-require("./socket")
+
 
 const app = express()
 app.disable('x-powered-by');

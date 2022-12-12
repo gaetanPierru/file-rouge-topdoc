@@ -16,8 +16,8 @@ export const users: userTypes[] = [
     telephone: "111111112",
     mot_de_passe: "$2b$10$NUOQNvbDfEO8EnvvRmI8oOhBjNPyARSE3H2Bya73s7U7wd7vkZGYm",
     localisationId: 2,
-    prenom: 'a',
-    nom: 'a',
+    prenom: 'b',
+    nom: 'b',
     genre: 'M',
     date_de_naissance: new Date()
   },
@@ -26,8 +26,8 @@ export const users: userTypes[] = [
     telephone: "111111111",
     mot_de_passe: "$2b$10$NUOQNvbDfEO8EnvvRmI8oOhBjNPyARSE3H2Bya73s7U7wd7vkZGYm",
     localisationId: 3,
-    prenom: 'a',
-    nom: 'a',
+    prenom: 'c',
+    nom: 'c',
     genre: 'M',
     date_de_naissance: new Date()
   },

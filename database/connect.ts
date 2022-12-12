@@ -30,9 +30,6 @@ const RendezVousModel = require('../models/rendezVous')
 const ActivityUsersModel = require('../models/activityUsers')
 
 const sequelize = new Sequelize(
-    //    "DatabaseCse",
-    //     'alexis',
-    //     '123456',
     `${process.env.NAME_DATABASE}`,
     `${process.env.HOST_DATABASE}`,
     `${process.env.PASS_DATABASE}`,
@@ -127,6 +124,10 @@ export const initDb = () => {
                 telephone: user.telephone,
                 mot_de_passe: user.mot_de_passe,
                 localisationId: user.localisationId,
+                nom: user.nom,
+                prenom: user.prenom,
+                date_de_naissance: user.date_de_naissance,
+                genre: user.genre
             }).then(async (req: any) => {
                 const roleRow = await Role.findByPk(index + 1);
                 await req.addRole(roleRow, { through: RoleUser })

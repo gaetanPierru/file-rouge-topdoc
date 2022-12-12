@@ -8,9 +8,9 @@ export const plannings: planningTypes[] = [
         activiteId: 1
     },
     {
-        duree_validite_calendrier: 6,
+        duree_validite_calendrier: 3,
         date_debut_planning: new Date(),
-        nom_planning: "courant",
+        nom_planning: "vacacion",
         activiteId: 1
     }
 ];
