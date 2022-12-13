@@ -29,4 +29,14 @@ export class UserService {
             return userDTO
         })
     }
+
+    async delete(id: number): Promise<boolean> {
+        return this.userRepository.delete(id).then(good => {
+            return good;
+        })
+    }
+
+    async update(user: userTypes, id: number): Promise<boolean> {
+        return this.userRepository.update(user,id).then(good => good)
+    }
 }

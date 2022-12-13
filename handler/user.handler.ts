@@ -36,6 +36,26 @@ async function postUser(req: Request, res: Response) {
         res.status(500).json(err)
     }
 }
-const handler = {getUserId, getUsers, postUser};
+
+async function deleteUser(req: Request, res: Response) {
+    const id = parseInt(req.params.id);
+    try {
+        const result = await userService.delete(id);
+        res.status(200).json(result? "supprimé": "fail")
+    } catch (err) {
+        res.status(500).json(err)
+    }
+}
+
+async function updateUser(req: Request, res: Response) {
+    const id = parseInt(req.params.id);
+    try {
+        const result = await userService.update(req.body, id);
+        res.status(200).json( result? "mis a jour": "fail");
+    } catch (err) {
+        res.status(500).json(err)
+    }
+}
+const handler = {getUserId, getUsers, postUser, deleteUser, updateUser};
 
 export default handler;

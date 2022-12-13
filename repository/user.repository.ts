@@ -14,11 +14,11 @@ export class UserRepository implements IRepository<userDTO> {
     async create(t: userTypes): Promise<userDTO> {
         return User.create(t).then((user: userId) => UserMapper.mapToDto(user))
     }
-    delete(id: number): Promise<boolean> {
-        throw new Error("Method not implemented.");
+    async delete(id: number): Promise<boolean> {
+        return User.destroy({where: {id: id}}).then((good: boolean) => good)
     }
-    update(t: userDTO): Promise<userDTO> {
-        throw new Error("Method not implemented.");
+    async update(t: userTypes, id: number): Promise<boolean> {
+        return User.update(t, {where: {id: id}}).then(((good: boolean[]) => good[0]))
     }
 
 }

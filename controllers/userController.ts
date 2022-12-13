@@ -43,7 +43,7 @@ usersController.get("/", handler.getUsers)
   *         in: body
   *         required: true
   *         type: object
-  *         default: { "password":"string","email": "email", "phone": 780372674, "isActif": true}
+  *         default: { "mot_de_passe":"string","email": "email", "telephone": "780372674","genre": "M", "prenom": "p", "nom": "n", "date_de_naissance" : "2020-01-01" }
   *      responses:
   *        200:
   *          description: Create a new user.
@@ -65,27 +65,7 @@ usersController.post("/", handler.postUser)
   *        200:
   *          description: Delete an user. 
   */
-usersController.delete("/:id", (req, res) => {
-    User.findByPk(req.params.id).then((user: userId) => {
-        if (user === null) {
-            const message = "L'utilisateur n'existe pas."
-            return res.status(404).json({ message: message })
-        }
-
-        const userDeleted = user;
-        return User.destroy({
-            where: { id: user.id }
-        })
-            .then(() => {
-                const message = `Utilisateur ${userDeleted.id} supprimé avec succes.`
-                res.json({ message, data: userDeleted })
-            })
-    })
-        .catch((error: ApiException) => {
-            const message = `Echec lors de la suppression de l'Utilisateur`;
-            res.status(500).json({ message, data: error });
-        });
-})
+usersController.delete("/:id", handler.deleteUser)
 
 /**
  * @openapi
@@ -139,44 +119,12 @@ usersController.get('/:id', handler.getUserId)
  *         in: body
  *         required: true
  *         type: object
- *         default: { "password":"string","email": "email", "phone": 780372674}
+ *         default: { "mot_de_passe":"string","email": "email", "telephone": "780372674", "genre": "M", "prenom": "p", "nom": "n", "date_de_naissance" : "2020-01-01" }
  *      responses:
  *        200:
  *          description: Update the user of given id.
  */
-usersController.put('/:id', async (req, res) => {
-    const id = req.params.id;
-    const { phone, email, isActif } = req.body
-
-    if (!req.body.password) return res.status(400).json({ passwordRequired: true, message: 'Besoin d\'un mot de passe.' })
-
-    let hashedPassword = await bcrypt.hash(req.body.password, 10);
-    User.update({
-        phone: phone,
-        password: hashedPassword,
-        email: email,
-        isActif: isActif
-    }, {
-        where: { id: id },
-    })
-        .then(() => {
-            return User.findByPk(id).then((user: userTypes) => {
-                if (user === null) {
-                    const message = "L'utilisateur n'existe pas."
-                    return res.status(404).json({ message })
-                }
-                const message = `Utilisateur mis à jour`;
-                res.json({ message, data: user });
-            })
-        })
-        .catch((error: ApiException) => {
-            if (error instanceof ValidationError) {
-                return res.status(400).json({ message: error.message, data: error })
-            }
-            const message = `Echec lors de la mise à jour de l'utilisateur.`;
-            res.status(500).json({ message, data: error });
-        });
-})
+usersController.put('/:id', handler.updateUser)
 
 usersController.use("/admin", adminController)
 

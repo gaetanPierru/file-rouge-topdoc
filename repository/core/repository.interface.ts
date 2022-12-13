@@ -3,5 +3,5 @@ export interface IRepository<T> {
     findAll(): Promise<T[]>;
     create(t: T): Promise<T>;
     delete(id: number): Promise<boolean>;
-    update(t: T): Promise<T>;
+    update(t: T, id: number): Promise<boolean>;
 }
