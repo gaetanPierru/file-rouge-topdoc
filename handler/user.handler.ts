@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { UserRepository } from "../repository/user.repository";
 import { UserService } from "../services/user.service";
+import bcrypt from "bcrypt"
 
 const userService = new UserService(new UserRepository);
 
@@ -29,6 +30,7 @@ async function getUsers(req: Request, res: Response) {
 }
 
 async function postUser(req: Request, res: Response) {
+    req.body.mot_de_passe =  await bcrypt.hash(req.body.mot_de_passe, 10)
     try {
         const result = await userService.create(req.body);
         res.status(200).json(result)

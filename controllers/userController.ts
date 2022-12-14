@@ -3,7 +3,6 @@ import { User, Localisation, Role } from "../database/connect";
 import { ApiException } from "../types/exception";
 import { userId, userTypes } from "../types/user";
 import { ValidationError } from "sequelize";
-import bcrypt from "bcrypt"
 import { adminController } from "./adminController";
 import handler from "../handler/user.handler";
 
@@ -47,6 +46,7 @@ usersController.get("/", handler.getUsers)
   *      responses:
   *        200:
   *          description: Create a new user.
+  * 
   */
 usersController.post("/", handler.postUser)
 
