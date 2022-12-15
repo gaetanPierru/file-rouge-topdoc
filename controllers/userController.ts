@@ -1,8 +1,4 @@
 import { Router } from "express";
-import { User, Localisation, Role } from "../database/connect";
-import { ApiException } from "../types/exception";
-import { userId, userTypes } from "../types/user";
-import { ValidationError } from "sequelize";
 import { adminController } from "./adminController";
 import handler from "../handler/user.handler";
 

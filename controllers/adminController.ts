@@ -8,7 +8,6 @@ import authenticateToken from "../middleware";
 const adminController = Router();
 
 
-
 /**
   * @openapi
   * /api/users/admin:
