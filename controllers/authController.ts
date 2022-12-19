@@ -1,9 +1,10 @@
 import { Router } from "express";
-import { User, Token, Role } from "../database/connect";
+import {Token, Role } from "../database/connect";
 import { ApiException } from "../types/exception";
 import { tokenTypes } from "../types/token";
 import { userTypes } from "../types/user";
 import bcrypt from 'bcrypt'
+import { User } from "../models/users";
 const jwt = require('jsonwebtoken')
 
 const authController = Router();

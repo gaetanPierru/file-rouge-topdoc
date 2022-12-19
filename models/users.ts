@@ -1,20 +1,30 @@
-import { DataTypes, Sequelize } from "sequelize"
-
-module.exports = (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
+import { DataTypes, Model, Sequelize } from "sequelize"
+import { sequelize } from "../database/connect";
+export class User extends Model{
+  email!: string;
+  telephone!: string;
+  mot_de_passe!: string;
+  localisationId!: number;
+  prenom!: string;
+  nom!: string;
+  genre!: string;
+  date_de_naissance!: Date;
+  
+} 
 
     const concatRequiredMessage = (data: string) => {
         return `${data} is required`
     }
 
-    return sequelize.define('utilisateur', {
+    User.init({
 
         id: {
-            type: dataTypes.INTEGER,
+            type: DataTypes.INTEGER,
             autoIncrement: true,
             primaryKey: true,
         },
         email: {
-            type: dataTypes.STRING,
+            type: DataTypes.STRING,
             allowNull: false,
             unique: true,
             validate: {
@@ -24,7 +34,7 @@ module.exports = (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
             }
         },
         mot_de_passe: {
-            type: dataTypes.STRING,
+            type: DataTypes.STRING,
             allowNull: false,
             validate: {
                 notNull: { msg: concatRequiredMessage('mot de passe') },
@@ -32,7 +42,7 @@ module.exports = (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
             }
         },
         telephone: {
-            type: dataTypes.STRING,
+            type: DataTypes.STRING,
             allowNull: false,
             unique: true,
             validate: {
@@ -40,17 +50,19 @@ module.exports = (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
             }
         },
         prenom: {
-            type: dataTypes.STRING
+            type: DataTypes.STRING
         },
         nom: {
-            type: dataTypes.STRING
+            type: DataTypes.STRING
         },
         genre: {
-            type: dataTypes.STRING
+            type: DataTypes.STRING
         },
         date_de_naissance: {
-            type: dataTypes.DATEONLY
+            type: DataTypes.DATEONLY
         }
 
+    }, {
+        sequelize
     })
-}
+

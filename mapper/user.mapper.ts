@@ -1,9 +1,12 @@
 import { userDTO } from "../DTO/user.dto";
+import { User } from "../models/users";
 import { userId } from "../types/user";
 
 export class UserMapper {
-    static mapToDto(user: userId | null): userDTO | null {
-        if (user === null) return null;
+    static mapToDto(user: User |null): userDTO {
+        if (user === null){
+            return null as any;
+        } 
         const dto : userDTO = {
             nom: user.nom,
             prenom: user.prenom,

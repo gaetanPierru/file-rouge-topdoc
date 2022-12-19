@@ -1,9 +1,10 @@
 import { Router } from "express";
 import { ValidationError } from "sequelize";
-import { User, Role, RoleUser } from "../database/connect";
+import { Role, RoleUser } from "../database/connect";
 import { ApiException } from "../types/exception";
 import bcrypt from 'bcrypt';
 import authenticateToken from "../middleware";
+import { User } from "../models/users";
 
 const adminController = Router();
 
