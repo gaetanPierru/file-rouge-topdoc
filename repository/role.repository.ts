@@ -14,10 +14,10 @@ export class RoleRepository implements IRepository<roleDTO> {
     create(t: roleTypes): Promise<roleDTO> {
         return Role.create(t).then((user: roleId) => RoleMapper.mapToDto(user))
     }
-    delete(id: number): Promise<boolean> {
+    delete(id: number): Promise<number |boolean> {
         return Role.destroy({where: {id: id}}).then((good: boolean) => good)
     }
-    update(t: roleDTO, id: number): Promise<boolean> {
+    update(t: roleDTO, id: number): Promise<number |boolean> {
         return Role.update(t, {where: {id: id}}).then(((good: boolean[]) => good[0]))
     }
  

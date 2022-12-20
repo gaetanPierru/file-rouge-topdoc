@@ -14,10 +14,10 @@ export class ActiviteRepository implements IRepository<activiteDTO> {
     create(t: activiteDTO): Promise<activiteDTO> {
         return Activity.create(t).then((user: activityId) => ActiviteMapper.mapToDto(user))
     }
-    delete(id: number): Promise<boolean> {
+    delete(id: number): Promise<number |boolean> {
         return Activity.destroy({where: {id: id}}).then((good: boolean) => good)
     }
-    update(t: activiteDTO, id: number): Promise<boolean> {
+    update(t: activiteDTO, id: number): Promise<number |boolean> {
         return Activity.update(t, {where: {id: id}}).then(((good: boolean[]) => good[0]))
     }
  

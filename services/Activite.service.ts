@@ -30,13 +30,13 @@ export class ActiviteService {
         })
     }
 
-    async delete(id: number): Promise<boolean> {
+    async delete(id: number): Promise<number |boolean> {
         return this.activiteRepository.delete(id).then(good => {
             return good;
         })
     }
 
-    async update(activite: activityTypes, id: number): Promise<boolean> {
+    async update(activite: activityTypes, id: number): Promise<number |boolean> {
         return this.activiteRepository.update(activite,id).then(good => good)
     }
 }

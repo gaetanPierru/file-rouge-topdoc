@@ -30,13 +30,13 @@ export class RoleService {
         })
     }
 
-    async delete(id: number): Promise<boolean> {
+    async delete(id: number): Promise<number |boolean> {
         return this.roleRepository.delete(id).then(good => {
             return good;
         })
     }
 
-    async update(role: roleTypes, id: number): Promise<boolean> {
+    async update(role: roleTypes, id: number): Promise<number |boolean> {
         return this.roleRepository.update(role,id).then(good => good)
     }
 }

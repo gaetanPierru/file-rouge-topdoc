@@ -14,10 +14,10 @@ export class LocalisationRepository implements IRepository<localisationDTO> {
     create(t: localisationDTO): Promise<localisationDTO> {
         return Localisation.create(t).then((user: localisationId) => LocalisationMapper.mapToDto(user))
     }
-    delete(id: number): Promise<boolean> {
+    delete(id: number): Promise<number |boolean> {
         return Localisation.destroy({where: {id: id}}).then((good: boolean) => good)
     }
-    update(t: localisationDTO, id: number): Promise<boolean> {
+    update(t: localisationDTO, id: number): Promise<number |boolean> {
         return Localisation.update(t, {where: {id: id}}).then(((good: boolean[]) => good[0]))
     }
  

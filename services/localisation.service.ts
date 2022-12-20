@@ -30,13 +30,13 @@ export class LocalisationService {
         })
     }
 
-    async delete(id: number): Promise<boolean> {
+    async delete(id: number): Promise<number |boolean> {
         return this.localisationRepository.delete(id).then(good => {
             return good;
         })
     }
 
-    async update(localisation: localisationTypes, id: number): Promise<boolean> {
+    async update(localisation: localisationTypes, id: number): Promise<number |boolean> {
         return this.localisationRepository.update(localisation,id).then(good => good)
     }
 }
