@@ -4,6 +4,7 @@ import { tokenController } from "./tokenController"
 import { roleController } from "./roleController"
 import { localisationController } from './localisationController';
 import { authController } from "./authController";
+import { activiteController } from "./activiteController";
 
 const swaggerJsDoc = require('swagger-jsdoc')
 const swaggerUi = require('swagger-ui-express')
@@ -34,5 +35,6 @@ apiController.use('/tokens', tokenController)
 apiController.use('/roles', roleController)
 apiController.use('/localisations', localisationController)
 apiController.use('/auth', authController)
+apiController.use('/activite', activiteController)
 
 export { apiController }

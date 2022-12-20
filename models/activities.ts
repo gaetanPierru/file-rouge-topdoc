@@ -17,7 +17,7 @@ module.exports = (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
         type : {
             type: dataTypes.STRING
         },
-        estActive: {
+        estActif: {
             type: dataTypes.BOOLEAN
         }
     })

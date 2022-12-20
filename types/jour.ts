@@ -6,7 +6,7 @@ export interface jourTypes {
 
 }
 
-export interface activityId extends jourTypes {
+export interface jourId extends jourTypes {
 
     id: number;
 

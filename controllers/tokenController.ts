@@ -101,8 +101,5 @@ tokenController.delete('/:id', async (req, res) => {
     });
 })
 
-// require('./routes/tokens/findAllTokens')(app)
-// require('./routes/tokens/findTokenByPk')(app)
-// require('./routes/tokens/deleteToken')(app)
 
 export { tokenController };

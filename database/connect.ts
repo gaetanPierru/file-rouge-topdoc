@@ -140,7 +140,7 @@ export const initDb = () => {
                 fonction: activity.fonction,
                 description: activity.description,
                 type: activity.type,
-                estActive: activity.estActif,
+                estActif: activity.estActif,
                 localisationId : activity.localisationId
             }).then((response: { toJSON: () => string }) => console.log(response.toJSON()))
         })

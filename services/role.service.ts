@@ -5,8 +5,8 @@ import { roleTypes } from "../types/role";
 export class RoleService {
     private roleRepository: IRepository<roleDTO>;
 
-    constructor(_userRepository: IRepository<roleDTO>) {
-        this.roleRepository =_userRepository;
+    constructor(_roleRepository: IRepository<roleDTO>) {
+        this.roleRepository =_roleRepository;
     }
 
     async findById(id: number): Promise<roleDTO | null> {
@@ -17,14 +17,14 @@ export class RoleService {
     }
 
     async findAll(): Promise<roleDTO[] | null> {
-        return this.roleRepository.findAll().then(userDTO => {
-            if(userDTO === null) return null;
-            return userDTO
+        return this.roleRepository.findAll().then(roleDTO => {
+            if(roleDTO === null) return null;
+            return roleDTO
         })
     }
 
-    async create(user: roleTypes): Promise<roleDTO | null> {
-        return this.roleRepository.create(user).then(roleDTO => {
+    async create(role: roleTypes): Promise<roleDTO | null> {
+        return this.roleRepository.create(role).then(roleDTO => {
             if(roleDTO === null) return null;
             return roleDTO
         })
@@ -36,7 +36,7 @@ export class RoleService {
         })
     }
 
-    async update(user: roleTypes, id: number): Promise<boolean> {
-        return this.roleRepository.update(user,id).then(good => good)
+    async update(role: roleTypes, id: number): Promise<boolean> {
+        return this.roleRepository.update(role,id).then(good => good)
     }
 }
