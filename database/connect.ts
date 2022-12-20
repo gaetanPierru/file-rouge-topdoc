@@ -14,7 +14,7 @@ import { activityTypes } from "../types/activity"
 import { planningTypes } from "../types/planning"
 import { rendezVousTypes } from "../types/rendezVous"
 
-const UserModel = require('../models/users')
+
 const TokenModel = require('../models/tokens')
 const LocalisationModel = require('../models/localisations')
 const RoleModel = require('../models/roles')
@@ -29,7 +29,7 @@ const JourPlanningModel = require('../models/jourPlanning')
 const RendezVousModel = require('../models/rendezVous')
 const ActivityUsersModel = require('../models/activityUsers')
 
-const sequelize = new Sequelize(
+export const sequelize = new Sequelize(
     `${process.env.NAME_DATABASE}`,
     `${process.env.HOST_DATABASE}`,
     `${process.env.PASS_DATABASE}`,
@@ -44,14 +44,15 @@ const sequelize = new Sequelize(
         },
         timezone: '+02:00'
     }
-)
-
-sequelize.authenticate()
+    )
+    
+    sequelize.authenticate()
     .then(() => console.log('Link established'))
     .catch((error: Error) => console.error(`Error: ${error}`)
     )
+    import { User } from "../models/users"
+    
 
-export const User = UserModel(sequelize, DataTypes)
 export const Token = TokenModel(sequelize, DataTypes)
 export const Localisation = LocalisationModel(sequelize, DataTypes)
 export const Role = RoleModel(sequelize, DataTypes)
