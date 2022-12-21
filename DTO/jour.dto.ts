@@ -1,0 +1,7 @@
+export interface JourDTO {
+    jour: number;
+    heure_debut_journee: Date;
+    heure_fin_journee: Date;
+    duree_crenaux: number;
+
+}
