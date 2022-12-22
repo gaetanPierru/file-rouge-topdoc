@@ -1,21 +1,24 @@
 import { IRepository } from "./core/repository.interface";
 import { PlanningDTO } from "../DTO/planning.dto";
+import { Planning } from "../database/connect";
+import { PlanningMapper } from "../mapper/planning.mapper";
+import { planningId } from "../types/planning";
 
 export class PlanningRepository implements IRepository<PlanningDTO> {
     findById(id: number): Promise<PlanningDTO | null> {
-        throw new Error("Method not implemented.");
+        return Planning.findByPk(id).then((Localisation: planningId | null) => PlanningMapper.mapToDto(Localisation))
     }
     findAll(): Promise<PlanningDTO[]> {
-        throw new Error("Method not implemented.");
+        return Planning.findAll().then((Localisations: planningId[]) => Localisations.map((Localisation: planningId) => PlanningMapper.mapToDto(Localisation)))
     }
     create(t: PlanningDTO): Promise<PlanningDTO> {
-        throw new Error("Method not implemented.");
+        return Planning.create(t).then((user: planningId) => PlanningMapper.mapToDto(user))
     }
-    delete(id: number): Promise<number | boolean> {
-        throw new Error("Method not implemented.");
+    delete(id: number): Promise<number |boolean> {
+        return Planning.destroy({where: {id: id}}).then((good: boolean) => good)
     }
-    update(t: PlanningDTO, id: number): Promise<number | boolean> {
-        throw new Error("Method not implemented.");
+    update(t: PlanningDTO, id: number): Promise<number |boolean> {
+        return Planning.update(t, {where: {id: id}}).then(((good: boolean[]) => good[0]))
     }
 
 }

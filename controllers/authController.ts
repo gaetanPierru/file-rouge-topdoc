@@ -9,6 +9,8 @@ const jwt = require('jsonwebtoken')
 
 const authController = Router();
 
+// TODO MOVE TO HANDLER
+
 /**
  * @swagger
  * tags:

@@ -8,7 +8,7 @@ import { User } from "../models/users";
 
 const adminController = Router();
 
-
+// TODO MOVE TO HANDLER
 /**
   * @openapi
   * /api/users/admin:

@@ -1,21 +1,24 @@
 import { IRepository } from "./core/repository.interface";
 import { BannisDTO } from "../DTO/bannis.dto";
+import { Bannis } from "../database/connect";
+import { BannisMapper } from "../mapper/bannis.mapper";
+import { bannisId } from "../types/bannis";
 
 export class BannisRepository implements IRepository<BannisDTO> {
     findById(id: number): Promise<BannisDTO | null> {
-        throw new Error("Method not implemented.");
+        return Bannis.findByPk(id).then((Localisation: bannisId | null) => BannisMapper.mapToDto(Localisation))
     }
     findAll(): Promise<BannisDTO[]> {
-        throw new Error("Method not implemented.");
+        return Bannis.findAll().then((Localisations: bannisId[]) => Localisations.map((Localisation: bannisId) => BannisMapper.mapToDto(Localisation)))
     }
     create(t: BannisDTO): Promise<BannisDTO> {
-        throw new Error("Method not implemented.");
+        return Bannis.create(t).then((user: bannisId) => BannisMapper.mapToDto(user))
     }
-    delete(id: number): Promise<number | boolean> {
-        throw new Error("Method not implemented.");
+    delete(id: number): Promise<number |boolean> {
+        return Bannis.destroy({where: {id: id}}).then((good: boolean) => good)
     }
-    update(t: BannisDTO, id: number): Promise<number | boolean> {
-        throw new Error("Method not implemented.");
+    update(t: BannisDTO, id: number): Promise<number |boolean> {
+        return Bannis.update(t, {where: {id: id}}).then(((good: boolean[]) => good[0]))
     }
 
 }

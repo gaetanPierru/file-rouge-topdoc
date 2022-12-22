@@ -11,11 +11,11 @@ module.exports = (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
             type: dataTypes.INTEGER,
             allowNull: false
         },
-        date_debut_journee: {
+        heure_debut_journee: {
             type: dataTypes.DATE,
             allowNull: false,
         },
-        date_fin_journee : {
+        heure_fin_journee : {
             type: dataTypes.DATE,
             allowNull: false
         },

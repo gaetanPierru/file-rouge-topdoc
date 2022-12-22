@@ -78,4 +78,30 @@ activiteController.delete("/:id", handler.deleteActivite)
   */
 activiteController.post("/", handler.postActivite)
 
+
+/**
+ * @openapi
+ * /api/activite/{id}:
+ *  put:
+ *      tags: [Activite]
+ *      description: Update an template
+ *      consumes:
+ *       - application/json
+ *      parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         type: integer
+ *         default: 1
+ *       - name: JSON
+ *         in: body
+ *         required: true
+ *         type: object
+ *         default: { "fonction":"string","description": "description", "type": "type","estActif": true, "LocalisationId": 1 }
+ *      responses:
+ *        200:
+ *          description: Update the user of given id.
+ */
+activiteController.put('/:id', handler.updateActivite)
+
 export { activiteController };

@@ -19,7 +19,7 @@ async function getRendezVousId(req: Request, res: Response) {
     }
 }
 
-async function getRendezVouss(req: Request, res: Response) {
+async function getRendezVous(req: Request, res: Response) {
     try {
         const result = await _RendezVousService.findAll();
         res.status(200).json(result)
@@ -56,6 +56,6 @@ async function updateRendezVous(req: Request, res: Response) {
         res.status(500).json(err)
     }
 }
-const handler = {getRendezVouss, getRendezVousId, postRendezVous, deleteRendezVous, updateRendezVous};
+const handler = {getRendezVous, getRendezVousId, postRendezVous, deleteRendezVous, updateRendezVous};
 
 export default handler;

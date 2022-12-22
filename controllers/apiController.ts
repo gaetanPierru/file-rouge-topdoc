@@ -5,6 +5,11 @@ import { roleController } from "./roleController"
 import { localisationController } from './localisationController';
 import { authController } from "./authController";
 import { activiteController } from "./activiteController";
+import { rendezVousController } from "./rendezVousController";
+import { bannisController } from "./bannisController";
+import { congeController } from "./congeController";
+import { jourController } from "./jourController";
+import { planningController } from "./planningController";
 
 const swaggerJsDoc = require('swagger-jsdoc')
 const swaggerUi = require('swagger-ui-express')
@@ -36,5 +41,10 @@ apiController.use('/roles', roleController)
 apiController.use('/localisations', localisationController)
 apiController.use('/auth', authController)
 apiController.use('/activite', activiteController)
+apiController.use('/rdv', rendezVousController)
+apiController.use('/bannis', bannisController)
+apiController.use('/conge', congeController)
+apiController.use('/jour', jourController)
+apiController.use('/planning', planningController)
 
 export { apiController }

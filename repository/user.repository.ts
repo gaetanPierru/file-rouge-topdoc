@@ -12,8 +12,12 @@ export class UserRepository implements IRepository<userDTO> {
     async findAll(): Promise<userDTO[]> {
        return User.findAll().then((users: User[]) => users.map((user: User) => UserMapper.mapToDto(user)))
     }
-    async create(t: Omit<User, 'id'>): Promise<userDTO> {
-        return User.create(t).then((user: User) => UserMapper.mapToDto(user))
+    async create(t: Omit<User, 'id'>): Promise<userDTO | null> {
+        try {
+            return User.create(t).then((user: User) => UserMapper.mapToDto(user))
+        } catch (error) {
+            return null
+        }
     }
     async delete(id: number): Promise<number |boolean> {
         return User.destroy({where: {id: id}}).then((good: number |boolean ) => good)
