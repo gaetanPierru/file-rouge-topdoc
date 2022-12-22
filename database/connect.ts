@@ -44,14 +44,14 @@ export const sequelize = new Sequelize(
         },
         timezone: '+02:00'
     }
-    )
-    
-    sequelize.authenticate()
-    .then(() => console.log('Link established'))
-    .catch((error: Error) => console.error(`Error: ${error}`)
-    )
-    import { User } from "../models/users"
-    
+)
+
+// sequelize.authenticate()
+//     .then(() => console.log('Link established'))
+//     .catch((error: Error) => console.error(`Error: ${error}`)
+//     )
+import { User } from "../models/users"
+
 
 export const Token = TokenModel(sequelize, DataTypes)
 export const Localisation = LocalisationModel(sequelize, DataTypes)
@@ -96,16 +96,16 @@ User.belongsToMany(Role, { through: RoleUser })
 Planning.belongsToMany(User, { through: jourPlanning })
 Jour.belongsToMany(Role, { through: jourPlanning })
 
-Bannis.belongsToMany(User, {through: BanUser })
-User.belongsToMany(Bannis, {through: BanUser })
+Bannis.belongsToMany(User, { through: BanUser })
+User.belongsToMany(Bannis, { through: BanUser })
 
-Activity.belongsToMany(User, {through: activityUsers })
-User.belongsToMany(Activity, {through: activityUsers })
+Activity.belongsToMany(User, { through: activityUsers })
+User.belongsToMany(Activity, { through: activityUsers })
 
 export const initDb = () => {
-    return sequelize.sync({force: true}).then(() => {
+    return sequelize.sync({ force: true }).then(() => {
         roles.map((role: roleTypes) => {
-            Role.create({   
+            Role.create({
                 role: role.role
             }).then((response: { toJSON: () => string }) => console.log(response.toJSON()))
         })
@@ -142,7 +142,7 @@ export const initDb = () => {
                 description: activity.description,
                 type: activity.type,
                 estActif: activity.estActif,
-                localisationId : activity.localisationId
+                localisationId: activity.localisationId
             }).then((response: { toJSON: () => string }) => console.log(response.toJSON()))
         })
 
@@ -159,7 +159,8 @@ export const initDb = () => {
                 date_debut_planning: planning.date_debut_planning,
                 nom_planning: planning.nom_planning,
                 activiteId: planning.activiteId
-            }).then((response: { toJSON: () => string }) => {console.log(response.toJSON())
+            }).then((response: { toJSON: () => string }) => {
+                console.log(response.toJSON())
                 mockRendezVous.map((rendezVous: rendezVousTypes) => {
                     RendezVous.create({
                         planningId: rendezVous.planningId,
