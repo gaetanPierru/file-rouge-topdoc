@@ -1,4 +1,6 @@
-import { DataTypes, Sequelize } from "sequelize"
+import { DataTypes } from "sequelize"
+import { User } from "../models/users"
+import { sequelize } from "./acces"
 import { tokenTypes } from "../types/token"
 import { userTypes } from "../types/user"
 import { users } from './mock-user'
@@ -29,29 +31,10 @@ const JourPlanningModel = require('../models/jourPlanning')
 const RendezVousModel = require('../models/rendezVous')
 const ActivityUsersModel = require('../models/activityUsers')
 
-export const sequelize = new Sequelize(
-    `${process.env.NAME_DATABASE}`,
-    `${process.env.HOST_DATABASE}`,
-    `${process.env.PASS_DATABASE}`,
-    {
-        host: 'localhost',
-        dialect: 'postgres',
-        port: 5432,
-        dialectOptions: {
-            useUTC: false,
-            dateStrings: true,
-            typeCast: true
-        },
-        timezone: '+02:00'
-    }
-)
-
 // sequelize.authenticate()
 //     .then(() => console.log('Link established'))
 //     .catch((error: Error) => console.error(`Error: ${error}`)
 //     )
-import { User } from "../models/users"
-
 
 export const Token = TokenModel(sequelize, DataTypes)
 export const Localisation = LocalisationModel(sequelize, DataTypes)
@@ -102,75 +85,77 @@ User.belongsToMany(Bannis, { through: BanUser })
 Activity.belongsToMany(User, { through: activityUsers })
 User.belongsToMany(Activity, { through: activityUsers })
 
+export default User
+
 export const initDb = () => {
     return sequelize.sync({ force: true }).then(() => {
-        roles.map((role: roleTypes) => {
-            Role.create({
-                role: role.role
-            }).then((response: { toJSON: () => string }) => console.log(response.toJSON()))
-        })
+        // roles.map((role: roleTypes) => {
+        //     Role.create({
+        //         role: role.role
+        //     }).then((response: { toJSON: () => string }) => console.log(response.toJSON()))
+        // })
 
-        localisations.map((localisation: localisationTypes) => {
-            Localisation.create({
-                address: localisation.address,
-                code_postal: localisation.code_postal,
-                ville: localisation.ville,
-                numero_de_rue: localisation.numero_de_rue
-            }).then((response: { toJSON: () => string }) => console.log(response.toJSON()))
-        })
+        // localisations.map((localisation: localisationTypes) => {
+        //     Localisation.create({
+        //         address: localisation.address,
+        //         code_postal: localisation.code_postal,
+        //         ville: localisation.ville,
+        //         numero_de_rue: localisation.numero_de_rue
+        //     }).then((response: { toJSON: () => string }) => console.log(response.toJSON()))
+        // })
 
-        users.map((user: userTypes, index: number) => {
-            User.create({
-                email: user.email,
-                telephone: user.telephone,
-                mot_de_passe: user.mot_de_passe,
-                localisationId: user.localisationId,
-                nom: user.nom,
-                prenom: user.prenom,
-                date_de_naissance: user.date_de_naissance,
-                genre: user.genre
-            }).then(async (req: any) => {
-                const roleRow = await Role.findByPk(index + 1);
-                await req.addRole(roleRow, { through: RoleUser })
+        // users.map((user: userTypes, index: number) => {
+        //     User.create({
+        //         email: user.email,
+        //         telephone: user.telephone,
+        //         mot_de_passe: user.mot_de_passe,
+        //         localisationId: user.localisationId,
+        //         nom: user.nom,
+        //         prenom: user.prenom,
+        //         date_de_naissance: user.date_de_naissance,
+        //         genre: user.genre
+        //     }).then(async (req: any) => {
+        //         const roleRow = await Role.findByPk(index + 1);
+        //         await req.addRole(roleRow, { through: RoleUser })
 
-            })
-        })
+        //     })
+        // })
 
-        activities.map((activity: activityTypes) => {
-            Activity.create({
-                fonction: activity.fonction,
-                description: activity.description,
-                type: activity.type,
-                estActif: activity.estActif,
-                localisationId: activity.localisationId
-            }).then((response: { toJSON: () => string }) => console.log(response.toJSON()))
-        })
+        // activities.map((activity: activityTypes) => {
+        //     Activity.create({
+        //         fonction: activity.fonction,
+        //         description: activity.description,
+        //         type: activity.type,
+        //         estActif: activity.estActif,
+        //         localisationId: activity.localisationId
+        //     }).then((response: { toJSON: () => string }) => console.log(response.toJSON()))
+        // })
 
-        tokens.map((token: tokenTypes) => {
-            Token.create({
-                refreshToken: token.refreshToken,
-                utilisateurId: token.UserId
-            }).then((response: { toJSON: () => string }) => console.log(response.toJSON()))
-        })
+        // tokens.map((token: tokenTypes) => {
+        //     Token.create({
+        //         refreshToken: token.refreshToken,
+        //         utilisateurId: token.UserId
+        //     }).then((response: { toJSON: () => string }) => console.log(response.toJSON()))
+        // })
 
-        plannings.map((planning: planningTypes) => {
-            Planning.create({
-                duree_validite_calendrier: planning.duree_validite_calendrier,
-                date_debut_planning: planning.date_debut_planning,
-                nom_planning: planning.nom_planning,
-                activiteId: planning.activiteId
-            }).then((response: { toJSON: () => string }) => {
-                console.log(response.toJSON())
-                mockRendezVous.map((rendezVous: rendezVousTypes) => {
-                    RendezVous.create({
-                        planningId: rendezVous.planningId,
-                        utilisateurId: rendezVous.utilisateurId,
-                        date_rendez_vous: rendezVous.date_rendez_vous,
-                        duree_rendez_vous: rendezVous.duree_rendez_vous
-                    }).then((response: { toJSON: () => string }) => console.log(response.toJSON()))
-                })
-            })
-        })
+        // plannings.map((planning: planningTypes) => {
+        //     Planning.create({
+        //         duree_validite_calendrier: planning.duree_validite_calendrier,
+        //         date_debut_planning: planning.date_debut_planning,
+        //         nom_planning: planning.nom_planning,
+        //         activiteId: planning.activiteId
+        //     }).then((response: { toJSON: () => string }) => {
+        //         console.log(response.toJSON())
+        //         mockRendezVous.map((rendezVous: rendezVousTypes) => {
+        //             RendezVous.create({
+        //                 planningId: rendezVous.planningId,
+        //                 utilisateurId: rendezVous.utilisateurId,
+        //                 date_rendez_vous: rendezVous.date_rendez_vous,
+        //                 duree_rendez_vous: rendezVous.duree_rendez_vous
+        //             }).then((response: { toJSON: () => string }) => console.log(response.toJSON()))
+        //         })
+        //     })
+        // })
 
         console.log('Database created')
     })

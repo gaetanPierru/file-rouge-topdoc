@@ -1,5 +1,7 @@
-import { DataTypes, Model, Sequelize } from "sequelize"
-import { sequelize } from "../database/connect";
+import { DataTypes, Model } from "sequelize"
+import { sequelize } from "../database/acces";
+
+
 export class User extends Model{
   email!: string;
   telephone!: string;
