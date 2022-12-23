@@ -1,7 +1,7 @@
 import { Conge } from "../../database/connect";
 import { CongeDTO } from "../../DTO/conge.dto";
 import { CongeRepository } from "../../repository/conge.repository";
-import { congeId } from "../../types/conge";
+import { congeId, congeTypes } from "../../types/conge";
 
 describe('CongeRepository', () => {
     beforeEach(() =>
@@ -76,6 +76,31 @@ describe('CongeRepository', () => {
 
             expect(result).toEqual(expected)
             expect(Conge.findAll).toHaveBeenCalledTimes(1)
+        })
+    })
+
+    describe('Conge post', () => {
+        it("doit retourne les details du Conge", async () => {
+
+            const mockReponse: congeTypes = {
+                date_debut: new Date('2000-01-01'),
+                date_fin: new Date('2001-01-01'),
+                ActiviteId: 1
+            }
+
+            const expected: CongeDTO = {
+                date_debut: new Date('2000-01-01'),
+                date_fin: new Date('2001-01-01'),
+                ActiviteId: 1
+            }
+
+            Conge.create = jest.fn().mockResolvedValue(mockReponse)
+
+            const repo = new CongeRepository()
+            const result = await repo.create(mockReponse)
+
+            expect(result).toEqual(expected)
+            expect(Conge.create).toHaveBeenCalledTimes(1)
         })
     })
 

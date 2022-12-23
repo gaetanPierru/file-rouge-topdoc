@@ -1,7 +1,7 @@
 import { Planning } from "../../database/connect";
 import { PlanningDTO } from "../../DTO/planning.dto";
 import { PlanningRepository } from "../../repository/planning.repository";
-import { planningId } from "../../types/planning";
+import { planningId, planningTypes } from "../../types/planning";
 
 describe('PlanningRepository', () => {
     beforeEach(() =>
@@ -82,6 +82,33 @@ describe('PlanningRepository', () => {
 
             expect(result).toEqual(expected)
             expect(Planning.findAll).toHaveBeenCalledTimes(1)
+        })
+    })
+
+    describe('Planning post', () => {
+        it("doit retourne les details du Planning", async () => {
+
+            const mockReponse: planningTypes = {
+                nom_planning: "a",
+                date_debut_planning: new Date('2020-01-01'),
+                duree_validite_calendrier: 6,
+                activiteId: 0
+            }
+
+            const expected: PlanningDTO = {
+                nom_planning: "a",
+                date_debut_planning: new Date('2020-01-01'),
+                duree_validite_calendrier: 6,
+                activiteId: 0
+            }
+
+            Planning.create = jest.fn().mockResolvedValue(mockReponse)
+
+            const repo = new PlanningRepository()
+            const result = await repo.create(mockReponse)
+
+            expect(result).toEqual(expected)
+            expect(Planning.create).toHaveBeenCalledTimes(1)
         })
     })
 

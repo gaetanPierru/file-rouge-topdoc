@@ -1,5 +1,7 @@
 import { Activity } from "../../database/connect";
+import { activiteDTO } from "../../DTO/activite.dto";
 import { ActiviteRepository } from "../../repository/activite.repository";
+import { activityTypes } from "../../types/activity";
 
 describe('ActiviteRepository', () => {
     beforeEach(() =>
@@ -82,6 +84,34 @@ describe('ActiviteRepository', () => {
 
             expect(result).toEqual(expected)
             expect(Activity.findAll).toHaveBeenCalledTimes(1)
+        })
+    })
+
+    describe('Activite post', () => {
+        it("doit retourne les details de l'activite", async () => {
+
+            const mockReponse: activityTypes = {
+                fonction: 'medecin',
+                description: 'depuis 30 ans',
+                type: 'jsp',
+                estActif: true,
+                localisationId: 1
+            }
+
+            const expected: activiteDTO = {
+                fonction: 'medecin',
+                description: 'depuis 30 ans',
+                type: 'jsp',
+                estActif: true
+            }
+
+            Activity.create = jest.fn().mockResolvedValue(mockReponse)
+
+            const repo = new ActiviteRepository()
+            const result = await repo.create(mockReponse)
+
+            expect(result).toEqual(expected)
+            expect(Activity.create).toHaveBeenCalledTimes(1)
         })
     })
 

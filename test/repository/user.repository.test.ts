@@ -1,7 +1,7 @@
 import User from "../../database/connect";
 import { userDTO } from "../../DTO/user.dto";
 import { UserRepository } from "../../repository/user.repository";
-import { userId } from "../../types/user";
+import { userId, userTypes } from "../../types/user";
 
 describe('UserRepository', () => {
     beforeEach(() =>
@@ -82,6 +82,39 @@ describe('UserRepository', () => {
 
             expect(result).toEqual(expected)
             expect(User.findAll).toHaveBeenCalledTimes(1)
+        })
+    })
+
+    describe('User post', () => {
+        it("doit retourne les details de l'utilisateur", async () => {
+
+            const mockReponse: any = {
+                email: "a@a.com",
+                telephone: "0123456789",
+                mot_de_passe: "test",
+                localisationId: 0,
+                prenom: "gaet",
+                nom: "an",
+                genre: "M",
+                date_de_naissance: new Date('2000-01-20')
+            }
+
+            const expected: userDTO = {
+                email: "a@a.com",
+                telephone: "0123456789",
+                prenom: "gaet",
+                nom: "an",
+                genre: "M",
+                date_de_naissance: new Date('2000-01-20')
+            }
+
+            User.create = jest.fn().mockResolvedValue(mockReponse)
+
+            const repo = new UserRepository()
+            const result = await repo.create(mockReponse)
+
+            expect(result).toEqual(expected)
+            expect(User.create).toHaveBeenCalledTimes(1)
         })
     })
 

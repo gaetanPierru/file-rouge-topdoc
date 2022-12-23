@@ -1,7 +1,7 @@
 import { Role } from "../../database/connect";
 import { roleDTO } from "../../DTO/role.dto";
 import { RoleRepository } from "../../repository/role.repository";
-import { roleId } from "../../types/role";
+import { roleId, roleTypes } from "../../types/role";
 
 describe('RoleRepository', () => {
     beforeEach(() =>
@@ -64,6 +64,27 @@ describe('RoleRepository', () => {
 
             expect(result).toEqual(expected)
             expect(Role.findAll).toHaveBeenCalledTimes(1)
+        })
+    })
+
+    describe('Role post', () => {
+        it("doit retourne les details du Role", async () => {
+
+            const mockReponse: roleTypes = {
+                role: "test"
+            }
+
+            const expected: roleDTO = {
+                role: "test"
+            }
+
+            Role.create = jest.fn().mockResolvedValue(mockReponse)
+
+            const repo = new RoleRepository()
+            const result = await repo.create(mockReponse)
+
+            expect(result).toEqual(expected)
+            expect(Role.create).toHaveBeenCalledTimes(1)
         })
     })
 

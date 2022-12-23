@@ -1,7 +1,7 @@
 import { Localisation } from "../../database/connect";
 import { localisationDTO } from "../../DTO/localisation.dto";
 import { LocalisationRepository } from "../../repository/localisation.repository";
-import { localisationId } from "../../types/localisation";
+import { localisationId, localisationTypes } from "../../types/localisation";
 
 describe('LocalisationRepository', () => {
     beforeEach(() =>
@@ -81,6 +81,33 @@ describe('LocalisationRepository', () => {
 
             expect(result).toEqual(expected)
             expect(Localisation.findAll).toHaveBeenCalledTimes(1)
+        })
+    })
+
+    describe('Localisation post', () => {
+        it("doit retourne les details du Localisation", async () => {
+
+            const mockReponse: localisationTypes = {
+                numero_de_rue: 0,
+                address: "rue",
+                code_postal: 12345,
+                ville: "unknown"
+            }
+
+            const expected: localisationDTO = {
+                numero_de_rue: 0,
+                address: "rue",
+                code_postal: 12345,
+                ville: "unknown"
+            }
+
+            Localisation.create = jest.fn().mockResolvedValue(mockReponse)
+
+            const repo = new LocalisationRepository()
+            const result = await repo.create(mockReponse)
+
+            expect(result).toEqual(expected)
+            expect(Localisation.create).toHaveBeenCalledTimes(1)
         })
     })
 

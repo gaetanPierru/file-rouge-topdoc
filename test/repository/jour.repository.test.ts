@@ -1,7 +1,7 @@
 import { Jour } from "../../database/connect";
 import { JourDTO } from "../../DTO/jour.dto";
 import { JourRepository } from "../../repository/jour.repository";
-import { jourId } from "../../types/jour";
+import { jourId, jourTypes } from "../../types/jour";
 
 describe('JourRepository', () => {
     beforeEach(() =>
@@ -82,6 +82,33 @@ describe('JourRepository', () => {
 
             expect(result).toEqual(expected)
             expect(Jour.findAll).toHaveBeenCalledTimes(1)
+        })
+    })
+
+    describe('Jour post', () => {
+        it("doit retourne les details du Jour", async () => {
+
+            const mockReponse: jourTypes = {
+                jour: 0,
+                heure_debut_journee: new Date('2020-01-01'),
+                heure_fin_journee:  new Date('2020-01-01'),
+                duree_crenaux: 30
+            }
+
+            const expected: JourDTO = {
+                jour: 0,
+                heure_debut_journee:  new Date('2020-01-01'),
+                heure_fin_journee:  new Date('2020-01-01'),
+                duree_crenaux: 30
+            }
+
+            Jour.create = jest.fn().mockResolvedValue(mockReponse)
+
+            const repo = new JourRepository()
+            const result = await repo.create(mockReponse)
+
+            expect(result).toEqual(expected)
+            expect(Jour.create).toHaveBeenCalledTimes(1)
         })
     })
 

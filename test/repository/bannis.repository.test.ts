@@ -1,7 +1,7 @@
 import { Bannis } from "../../database/connect";
 import { BannisDTO } from "../../DTO/bannis.dto";
 import { BannisRepository } from "../../repository/bannis.repository";
-import { bannisId } from "../../types/bannis";
+import { bannisId, bannisTypes } from "../../types/bannis";
 
 describe('BannisRepository', () => {
     beforeEach(() =>
@@ -70,6 +70,29 @@ describe('BannisRepository', () => {
 
             expect(result).toEqual(expected)
             expect(Bannis.findAll).toHaveBeenCalledTimes(1)
+        })
+    })
+
+    describe('Bannis post', () => {
+        it("doit retourne les details du Bannis", async () => {
+
+            const mockReponse: bannisTypes = {
+                bannis_email: "a@a.com",
+                raison: "insulte"
+            }
+
+            const expected: BannisDTO = {
+                bannis_email: "a@a.com",
+                raison: "insulte"
+            }
+
+            Bannis.create = jest.fn().mockResolvedValue(mockReponse)
+
+            const repo = new BannisRepository()
+            const result = await repo.create(mockReponse)
+
+            expect(result).toEqual(expected)
+            expect(Bannis.create).toHaveBeenCalledTimes(1)
         })
     })
 
