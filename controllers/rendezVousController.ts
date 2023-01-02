@@ -1,5 +1,5 @@
 import { Router } from "express";
-import handler from "../handler/rendezVous.handler";
+import { rdvHandler } from "../inject";
 
 
 const rendezVousController = Router();
@@ -21,7 +21,7 @@ const rendezVousController = Router();
  *        200:
  *          description: Get the list of all activities.
  */
-rendezVousController.get("/", handler.getRendezVous)
+rendezVousController.get("/", rdvHandler.getRendezVous)
 
 /**
  * @openapi
@@ -39,7 +39,7 @@ rendezVousController.get("/", handler.getRendezVous)
  *        200:
  *          description: Get the activite of given id.
  */
-rendezVousController.get("/:id", handler.getRendezVousId)
+rendezVousController.get("/:id", rdvHandler.getRendezVousId)
 
 /**
   * @openapi
@@ -56,7 +56,7 @@ rendezVousController.get("/:id", handler.getRendezVousId)
   *        200:
   *          description: Delete an activite. 
   */
-rendezVousController.delete("/:id", handler.deleteRendezVous)
+rendezVousController.delete("/:id", rdvHandler.deleteRendezVous)
 
 /**
   * @openapi
@@ -77,7 +77,7 @@ rendezVousController.delete("/:id", handler.deleteRendezVous)
   *          description: Create a new user.
   * 
   */
-rendezVousController.post("/", handler.postRendezVous)
+rendezVousController.post("/", rdvHandler.postRendezVous)
 
 
 
@@ -104,6 +104,6 @@ rendezVousController.post("/", handler.postRendezVous)
  *        200:
  *          description: Update the user of given id.
  */
-  rendezVousController.put('/:id', handler.updateRendezVous)
+  rendezVousController.put('/:id', rdvHandler.updateRendezVous)
 
 export { rendezVousController };

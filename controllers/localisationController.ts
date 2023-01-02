@@ -1,9 +1,5 @@
 import { Router } from "express";
-import { Localisation } from "../database/connect";
-import { localisationTypes } from "../types/localisation";
-import { ValidationError } from "sequelize";
-import { ApiException } from "../types/exception";
-import handler from "../handler/localisation.handler";
+import { localisationHandler } from "../inject";
 
 const localisationController = Router();
 
@@ -32,7 +28,7 @@ const localisationController = Router();
   *        200:
   *          description: Create a new localisation.
   */
-localisationController.post('/', handler.postLocalisation)
+localisationController.post('/', localisationHandler.postLocalisation)
 
 /**
   * @openapi
@@ -49,7 +45,7 @@ localisationController.post('/', handler.postLocalisation)
   *        200:
   *          description: Delete a localisation. 
   */
-localisationController.delete('/:id', handler.deleteLocalisation)
+localisationController.delete('/:id', localisationHandler.deleteLocalisation)
 
 /**
  * @openapi
@@ -60,7 +56,7 @@ localisationController.delete('/:id', handler.deleteLocalisation)
  *        200:
  *          description: Get the list of all localisation.
  */
-localisationController.get('/', handler.getLocalisations)
+localisationController.get('/', localisationHandler.getLocalisations)
 
 /**
  * @openapi
@@ -77,7 +73,7 @@ localisationController.get('/', handler.getLocalisations)
  *        200:
  *          description: Get one specifique localisation.
  */
-localisationController.get('/:id', handler.getLocalisationId)
+localisationController.get('/:id', localisationHandler.getLocalisationId)
 
 /**
   * @openapi
@@ -102,6 +98,6 @@ localisationController.get('/:id', handler.getLocalisationId)
   *        200:
   *          description: Update the localisation of given id.
   */
-localisationController.put('/:id', handler.updateLocalisation)
+localisationController.put('/:id', localisationHandler.updateLocalisation)
 
 export { localisationController }

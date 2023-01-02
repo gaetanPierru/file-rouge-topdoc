@@ -1,5 +1,5 @@
 import { Router } from "express";
-import handler from "../handler/planning.handler";
+import { planningHandler } from "../inject";
 
 
 const planningController = Router();
@@ -31,7 +31,7 @@ const planningController = Router();
   *        200:
   *          description: Create a new planning.
   */
-planningController.post('/',handler.postPlanning)
+planningController.post('/',planningHandler.postPlanning)
 
 /**
   * @openapi
@@ -48,7 +48,7 @@ planningController.post('/',handler.postPlanning)
   *        200:
   *          description: Delete a planning. 
   */
-planningController.delete('/:id', handler.deletePlanning)
+planningController.delete('/:id', planningHandler.deletePlanning)
 
 /**
  * @openapi
@@ -59,7 +59,7 @@ planningController.delete('/:id', handler.deletePlanning)
  *        200:
  *          description: Get the list of all planning.
  */
-planningController.get('/', handler.getPlannings)
+planningController.get('/', planningHandler.getPlannings)
 
 /**
  * @openapi
@@ -76,7 +76,7 @@ planningController.get('/', handler.getPlannings)
  *        200:
  *          description: Get one specifique planning.
  */
-planningController.get('/:id', handler.getPlanningId)
+planningController.get('/:id', planningHandler.getPlanningId)
 
 /**
   * @openapi
@@ -101,6 +101,6 @@ planningController.get('/:id', handler.getPlanningId)
   *        200:
   *          description: Update the planning of given id.
   */
-planningController.put('/:id', handler.updatePlanning)
+planningController.put('/:id', planningHandler.updatePlanning)
 
 export { planningController }

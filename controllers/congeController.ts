@@ -1,5 +1,5 @@
 import { Router } from "express";
-import handler from "../handler/conge.handler";
+import { congeHandler } from "../inject";
 
 
 const congeController = Router();
@@ -31,7 +31,7 @@ const congeController = Router();
   *        200:
   *          description: Create a new conge.
   */
-congeController.post('/',handler.postConge)
+congeController.post('/',congeHandler.postConge)
 
 /**
   * @openapi
@@ -48,7 +48,7 @@ congeController.post('/',handler.postConge)
   *        200:
   *          description: Delete a conge. 
   */
-congeController.delete('/:id', handler.deleteConge)
+congeController.delete('/:id', congeHandler.deleteConge)
 
 /**
  * @openapi
@@ -59,7 +59,7 @@ congeController.delete('/:id', handler.deleteConge)
  *        200:
  *          description: Get the list of all conge.
  */
-congeController.get('/', handler.getConges)
+congeController.get('/', congeHandler.getConges)
 
 /**
  * @openapi
@@ -76,7 +76,7 @@ congeController.get('/', handler.getConges)
  *        200:
  *          description: Get one specifique conge.
  */
-congeController.get('/:id', handler.getCongeId)
+congeController.get('/:id', congeHandler.getCongeId)
 
 /**
   * @openapi
@@ -101,6 +101,6 @@ congeController.get('/:id', handler.getCongeId)
   *        200:
   *          description: Update the conge of given id.
   */
-congeController.put('/:id', handler.updateConge)
+congeController.put('/:id', congeHandler.updateConge)
 
 export { congeController }

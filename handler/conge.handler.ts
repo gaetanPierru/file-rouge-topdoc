@@ -1,61 +1,66 @@
 import { Request, Response } from "express";
-import { CongeService } from "../services/conge.service";
-import { CongeRepository } from "../repository/conge.repository";
+import { CongeDTO } from "../DTO/conge.dto";
+import { IService } from "../services/core/service.interface";
 
-const _CongeService = new CongeService(new CongeRepository);
+export class CongeHandler {
 
-async function getCongeId(req: Request, res: Response) {
-    const id = parseInt(req.params.id);
+    private CongeService: IService<CongeDTO>;
 
-    try {
-        if(Number.isInteger(id)){
-            const result = await _CongeService.findById(id);
-            if(result === null) return res.status(404).send()
-            res.status(200).json(result)
+    constructor(service: IService<CongeDTO>) {
+        this.CongeService = service;
+    }
+
+    getCongeId = async (req: Request, res: Response) => {
+        const id = parseInt(req.params.id);
+
+        try {
+            if (Number.isInteger(id)) {
+                const result = await this.CongeService.findById(id);
+                if (result === null) return res.status(404).send()
+                res.status(200).json(result)
+            }
+
+        } catch (err) {
+            res.status(500).json(err)
         }
-
-    } catch(err) {
-        res.status(500).json(err)
     }
-}
 
-async function getConges(req: Request, res: Response) {
-    try {
-        const result = await _CongeService.findAll();
-        res.status(200).json(result)
-    } catch (err) {
-        res.status(500).json(err)
+    getConges = async (req: Request, res: Response) => {
+        try {
+            const result = await this.CongeService.findAll();
+            res.status(200).json(result)
+        } catch (err) {
+            res.status(500).json(err)
+        }
     }
-}
 
-async function postConge(req: Request, res: Response) {
-    try {
-        const result = await _CongeService.create(req.body);
-        res.status(200).json(result)
-    } catch (err) {
-        res.status(500).json(err)
+    postConge = async (req: Request, res:Response) => {
+        try {
+            const result = await this.CongeService.create(req.body);
+            res.status(200).json(result)
+        } catch (err) {
+            res.status(500).json(err)
+        }
     }
-}
 
-async function deleteConge(req: Request, res: Response) {
-    const id = parseInt(req.params.id);
-    try {
-        const result = await _CongeService.delete(id);
-        res.status(200).json(result? "supprimé": "fail")
-    } catch (err) {
-        res.status(500).json(err)
+    deleteConge = async (req: Request, res: Response) => {
+        const id = parseInt(req.params.id);
+        try {
+            const result = await this.CongeService.delete(id);
+            res.status(200).json(result ? "supprimé" : "fail")
+        } catch (err) {
+            res.status(500).json(err)
+        }
     }
-}
 
-async function updateConge(req: Request, res: Response) {
-    const id = parseInt(req.params.id);
-    try {
-        const result = await _CongeService.update(req.body, id);
-        res.status(200).json( result? "mis a jour": "fail");
-    } catch (err) {
-        res.status(500).json(err)
+    updateConge = async (req:Request, res: Response) => {
+        const id = parseInt(req.params.id);
+        try {
+            const result = await this.CongeService.update(req.body, id);
+            res.status(200).json(result ? "mis a jour" : "fail");
+        } catch (err) {
+            res.status(500).json(err)
+        }
     }
-}
-const handler = {getConges, getCongeId, postConge, deleteConge, updateConge};
 
-export default handler;
+}

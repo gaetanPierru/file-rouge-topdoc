@@ -1,9 +1,8 @@
 import { Request, Response } from "express";
-import { UserRepository } from "../repository/user.repository";
-import { UserService } from "../services/user.service";
-import bcrypt from "bcrypt"
 import { UserLocalisationService } from "../services/userLocalisation.service";
 import { UserFullRepository } from "../repository/userLocalisation.repository";
+
+//TODO change to depedenci invertion
 
 const userService = new UserLocalisationService(new UserFullRepository);
 

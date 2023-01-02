@@ -1,7 +1,6 @@
 import { Router } from "express";
 import { adminController } from "./adminController";
-import handler from "../handler/user.handler";
-import handlerTwo from "../handler/userLocalisation.handler"
+import { userHandler } from "../inject";
 const usersController = Router();
 
 /**
@@ -21,7 +20,7 @@ const usersController = Router();
  *        200:
  *          description: Get the list of all users.
  */
-usersController.get("/", handlerTwo.getUsers)
+usersController.get("/", userHandler.getUsers)
 
 
 
@@ -44,7 +43,7 @@ usersController.get("/", handlerTwo.getUsers)
   *          description: Create a new user.
   * 
   */
-usersController.post("/", handler.postUser)
+usersController.post("/", userHandler.postUser)
 
 /**
   * @openapi
@@ -61,7 +60,7 @@ usersController.post("/", handler.postUser)
   *        200:
   *          description: Delete an user. 
   */
-usersController.delete("/:id", handler.deleteUser)
+usersController.delete("/:id", userHandler.deleteUser)
 
 /**
  * @openapi
@@ -79,7 +78,7 @@ usersController.delete("/:id", handler.deleteUser)
  *        200:
  *          description: Get the user of given id.
  */
-usersController.get('/:id', handlerTwo.getUserId)
+usersController.get('/:id', userHandler.getUserId)
 
 /**
  * @openapi
@@ -104,7 +103,7 @@ usersController.get('/:id', handlerTwo.getUserId)
  *        200:
  *          description: Update the user of given id.
  */
-usersController.put('/:id', handler.updateUser)
+usersController.put('/:id', userHandler.updateUser)
 
 usersController.use("/admin", adminController)
 

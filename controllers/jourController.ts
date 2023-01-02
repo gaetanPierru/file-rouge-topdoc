@@ -1,5 +1,5 @@
 import { Router } from "express";
-import handler from "../handler/jour.handler";
+import { jourHandler } from "../inject";
 
 
 const jourController = Router();
@@ -31,7 +31,7 @@ const jourController = Router();
   *        200:
   *          description: Create a new jour.
   */
-jourController.post('/',handler.postJour)
+jourController.post('/',jourHandler.postJour)
 
 /**
   * @openapi
@@ -48,7 +48,7 @@ jourController.post('/',handler.postJour)
   *        200:
   *          description: Delete a jour. 
   */
-jourController.delete('/:id', handler.deleteJour)
+jourController.delete('/:id', jourHandler.deleteJour)
 
 /**
  * @openapi
@@ -59,7 +59,7 @@ jourController.delete('/:id', handler.deleteJour)
  *        200:
  *          description: Get the list of all jour.
  */
-jourController.get('/', handler.getJours)
+jourController.get('/', jourHandler.getJours)
 
 /**
  * @openapi
@@ -76,7 +76,7 @@ jourController.get('/', handler.getJours)
  *        200:
  *          description: Get one specifique jour.
  */
-jourController.get('/:id', handler.getJourId)
+jourController.get('/:id', jourHandler.getJourId)
 
 /**
   * @openapi
@@ -101,6 +101,6 @@ jourController.get('/:id', handler.getJourId)
   *        200:
   *          description: Update the jour of given id.
   */
-jourController.put('/:id', handler.updateJour)
+jourController.put('/:id', jourHandler.updateJour)
 
 export { jourController }

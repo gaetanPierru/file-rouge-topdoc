@@ -1,5 +1,5 @@
 import { Router } from "express";
-import handler from "../handler/role.handler";
+import { roleHandler } from "../inject";
 
 
 const roleController = Router();
@@ -20,7 +20,7 @@ const roleController = Router();
  *        200:
  *          description: Get the list of all roles.
  */
-roleController.get('/', handler.getRoles)
+roleController.get('/', roleHandler.getRoles)
 
 /**
   * @openapi
@@ -40,7 +40,7 @@ roleController.get('/', handler.getRoles)
   *        200:
   *          description: Create a new role.
   */
-roleController.post('/', handler.postRole)
+roleController.post('/', roleHandler.postRole)
 
 /**
   * @openapi
@@ -57,7 +57,7 @@ roleController.post('/', handler.postRole)
   *        200:
   *          description: Delete a role. 
   */
-roleController.delete('/:id', handler.deleteRole)
+roleController.delete('/:id', roleHandler.deleteRole)
 
 /**
  * @openapi
@@ -74,7 +74,7 @@ roleController.delete('/:id', handler.deleteRole)
  *        200:
  *          description: Get one specifique role.
  */
-roleController.get('/:id', handler.getRoleId)
+roleController.get('/:id', roleHandler.getRoleId)
 
 /**
   * @openapi
@@ -99,6 +99,6 @@ roleController.get('/:id', handler.getRoleId)
   *        200:
   *          description: Update the role of given id.
   */
-roleController.put('/:id', handler.updateRole)
+roleController.put('/:id', roleHandler.updateRole)
 
 export { roleController }

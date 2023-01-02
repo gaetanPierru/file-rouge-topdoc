@@ -1,5 +1,5 @@
 import { Router } from "express";
-import handler from "../handler/bannis.handler";
+import { bannisHandler } from "../inject";
 
 const bannisController = Router();
 
@@ -30,7 +30,7 @@ const bannisController = Router();
   *        200:
   *          description: Create a new bannis.
   */
-bannisController.post('/',handler.postBannis)
+bannisController.post('/',bannisHandler.postBannis)
 
 /**
   * @openapi
@@ -47,7 +47,7 @@ bannisController.post('/',handler.postBannis)
   *        200:
   *          description: Delete a bannis. 
   */
-bannisController.delete('/:id', handler.deleteBannis)
+bannisController.delete('/:id', bannisHandler.deleteBannis)
 
 /**
  * @openapi
@@ -58,7 +58,7 @@ bannisController.delete('/:id', handler.deleteBannis)
  *        200:
  *          description: Get the list of all bannis.
  */
-bannisController.get('/', handler.getBanniss)
+bannisController.get('/', bannisHandler.getBanniss)
 
 /**
  * @openapi
@@ -75,7 +75,7 @@ bannisController.get('/', handler.getBanniss)
  *        200:
  *          description: Get one specifique bannis.
  */
-bannisController.get('/:id', handler.getBannisId)
+bannisController.get('/:id', bannisHandler.getBannisId)
 
 /**
   * @openapi
@@ -100,6 +100,6 @@ bannisController.get('/:id', handler.getBannisId)
   *        200:
   *          description: Update the bannis of given id.
   */
-bannisController.put('/:id', handler.updateBannis)
+bannisController.put('/:id', bannisHandler.updateBannis)
 
 export { bannisController }
