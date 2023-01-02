@@ -1,8 +1,9 @@
 import { localisationDTO } from "../DTO/localisation.dto";
 import { IRepository } from "../repository/core/repository.interface";
 import { localisationTypes } from "../types/localisation";
+import { IService } from "./core/service.interface";
 
-export class LocalisationService {
+export class LocalisationService implements IService<localisationDTO>{
     private localisationRepository: IRepository<localisationDTO>;
 
     constructor(_localisationRepository: IRepository<localisationDTO>) {

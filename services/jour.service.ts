@@ -1,8 +1,9 @@
 import { JourDTO } from "../DTO/jour.dto";
 import { IRepository } from "../repository/core/repository.interface";
 import { jourTypes } from "../types/jour";
+import { IService } from "./core/service.interface";
 
-export class JourService {
+export class JourService implements IService<JourDTO>{
     private JourRepository: IRepository<JourDTO>;
 
     constructor(_JourRepository: IRepository<JourDTO>) {

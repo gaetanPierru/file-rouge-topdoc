@@ -6,3 +6,12 @@ export interface userDTO {
     email: string,
     telephone: string
 }
+
+export interface userFullDTO extends userDTO {
+    localisation : {
+        numero_de_rue: number;
+        address: string;
+        code_postal: number;
+        ville: string;
+    }
+}

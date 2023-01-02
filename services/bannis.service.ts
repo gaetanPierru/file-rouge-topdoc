@@ -1,8 +1,9 @@
 import { BannisDTO } from "../DTO/bannis.dto";
 import { IRepository } from "../repository/core/repository.interface";
 import { bannisTypes } from "../types/bannis";
+import { IService } from "./core/service.interface";
 
-export class BannisService {
+export class BannisService implements IService<BannisDTO>{
     private bannisRepository: IRepository<BannisDTO>;
 
     constructor(_bannisRepository: IRepository<BannisDTO>) {

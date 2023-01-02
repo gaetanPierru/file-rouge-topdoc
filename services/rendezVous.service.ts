@@ -1,8 +1,9 @@
 import { RendezVousDTO } from "../DTO/rendezVous.dto";
 import { IRepository } from "../repository/core/repository.interface";
 import { rendezVousTypes } from "../types/rendezVous";
+import { IService } from "./core/service.interface";
 
-export class RendezVousService {
+export class RendezVousService implements IService<RendezVousDTO>{
     private RendezVousRepository: IRepository<RendezVousDTO>;
 
     constructor(_RendezVousRepository: IRepository<RendezVousDTO>) {

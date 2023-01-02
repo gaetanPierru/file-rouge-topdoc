@@ -1,8 +1,9 @@
 import { PlanningDTO } from "../DTO/planning.dto";
 import { IRepository } from "../repository/core/repository.interface";
 import { planningTypes } from "../types/planning";
+import { IService } from "./core/service.interface";
 
-export class PlanningService {
+export class PlanningService implements IService<PlanningDTO>{
     private PlanningRepository: IRepository<PlanningDTO>;
 
     constructor(_PlanningRepository: IRepository<PlanningDTO>) {

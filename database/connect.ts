@@ -88,7 +88,7 @@ User.belongsToMany(Activity, { through: activityUsers })
 export default User
 
 export const initDb = () => {
-    return sequelize.sync({ force: true }).then(() => {
+    return sequelize.sync({alter: true  }).then(() => {
         // roles.map((role: roleTypes) => {
         //     Role.create({
         //         role: role.role

@@ -19,9 +19,6 @@ app.use(express.json())
 
 
 const port = process.env.PORT || 5000
-app.listen(port, () => {
-    console.log(`Listening on port ${port}...`)
-})
 
 app.get("/", (req: Request, res: Response) => {
     res.send("SWAGGER : /api/docs")
@@ -34,4 +31,7 @@ app.use(({ res: ApiException }: any) => {
     return ApiException.status(404).json({ message })
 })
 
+app.listen(port, () => {
+    console.log(`Listening on port ${port}...`)
+})
 export default app

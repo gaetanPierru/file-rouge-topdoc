@@ -1,8 +1,9 @@
 import { roleDTO } from "../DTO/role.dto";
 import { IRepository } from "../repository/core/repository.interface";
 import { roleTypes } from "../types/role";
+import { IService } from "./core/service.interface";
 
-export class RoleService {
+export class RoleService implements IService<roleDTO>{
     private roleRepository: IRepository<roleDTO>;
 
     constructor(_roleRepository: IRepository<roleDTO>) {

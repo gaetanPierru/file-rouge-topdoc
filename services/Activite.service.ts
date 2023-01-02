@@ -1,8 +1,9 @@
 import { activiteDTO } from "../DTO/activite.dto";
 import { IRepository } from "../repository/core/repository.interface";
 import { activityTypes } from "../types/activity";
+import { IService } from "./core/service.interface";
 
-export class ActiviteService {
+export class ActiviteService implements IService<activiteDTO>{
     private activiteRepository: IRepository<activiteDTO>;
 
     constructor(_activiteRepository: IRepository<activiteDTO>) {

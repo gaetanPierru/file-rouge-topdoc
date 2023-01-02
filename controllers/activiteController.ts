@@ -1,5 +1,5 @@
 import { Router } from "express";
-import handler from "../handler/activite.handler";
+import { activiteHandler } from "../inject";
 
 const activiteController = Router();
 
@@ -20,7 +20,7 @@ const activiteController = Router();
  *        200:
  *          description: Get the list of all activities.
  */
-activiteController.get("/", handler.getActivites)
+activiteController.get("/", activiteHandler.getActivites)
 
 /**
  * @openapi
@@ -38,7 +38,7 @@ activiteController.get("/", handler.getActivites)
  *        200:
  *          description: Get the activite of given id.
  */
-activiteController.get("/:id", handler.getActiviteId)
+activiteController.get("/:id", activiteHandler.getActiviteId)
 
 /**
   * @openapi
@@ -55,7 +55,7 @@ activiteController.get("/:id", handler.getActiviteId)
   *        200:
   *          description: Delete an activite. 
   */
-activiteController.delete("/:id", handler.deleteActivite)
+activiteController.delete("/:id", activiteHandler.deleteActivite)
 
 /**
   * @openapi
@@ -76,7 +76,7 @@ activiteController.delete("/:id", handler.deleteActivite)
   *          description: Create a new user.
   * 
   */
-activiteController.post("/", handler.postActivite)
+activiteController.post("/", activiteHandler.postActivite)
 
 
 /**
@@ -102,6 +102,6 @@ activiteController.post("/", handler.postActivite)
  *        200:
  *          description: Update the user of given id.
  */
-activiteController.put('/:id', handler.updateActivite)
+activiteController.put('/:id', activiteHandler.updateActivite)
 
 export { activiteController };

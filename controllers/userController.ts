@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { adminController } from "./adminController";
 import handler from "../handler/user.handler";
-
+import handlerTwo from "../handler/userLocalisation.handler"
 const usersController = Router();
 
 /**
@@ -21,7 +21,7 @@ const usersController = Router();
  *        200:
  *          description: Get the list of all users.
  */
-usersController.get("/", handler.getUsers)
+usersController.get("/", handlerTwo.getUsers)
 
 
 
@@ -79,23 +79,7 @@ usersController.delete("/:id", handler.deleteUser)
  *        200:
  *          description: Get the user of given id.
  */
-// usersController.get('/:id', async (req, res) => {
-//     User.findByPk(req.params.id, {attributes: {exclude: ['password']}})
-//         .then((user: userTypes) => {
-//             if (user === null) {
-//                 const message = "L'utilisateur n'existe pas."
-//                 return res.status(404).json({ message })
-//             }
-
-//             const message: string = 'Utilisateur trouvé.'
-//             res.json({ message, data: user })
-//         })
-//         .catch((error: ApiException) => {
-//             const message = "Echec Utilisateur non trouvé."
-//             res.status(500).json({ message, data: error })
-//         })
-// })
-usersController.get('/:id', handler.getUserId)
+usersController.get('/:id', handlerTwo.getUserId)
 
 /**
  * @openapi

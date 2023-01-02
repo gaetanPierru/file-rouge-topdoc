@@ -1,8 +1,9 @@
 import { CongeDTO } from "../DTO/conge.dto";
 import { IRepository } from "../repository/core/repository.interface";
 import { congeTypes } from "../types/conge";
+import { IService } from "./core/service.interface";
 
-export class CongeService {
+export class CongeService implements IService<CongeDTO>{
     private CongeRepository: IRepository<CongeDTO>;
 
     constructor(_CongeRepository: IRepository<CongeDTO>) {
