@@ -6,10 +6,10 @@ import { congeId } from "../types/conge";
 
 export class CongeRepository implements IRepository<CongeDTO> {
     findById(id: number): Promise<CongeDTO | null> {
-        return Conge.findByPk(id).then((Localisation: congeId | null) => CongeMapper.mapToDto(Localisation))
+        return Conge.findByPk(id).then((jour: congeId | null) => CongeMapper.mapToDto(jour))
     }
     findAll(): Promise<CongeDTO[]> {
-        return Conge.findAll().then((Localisations: congeId[]) => Localisations.map((Localisation: congeId) => CongeMapper.mapToDto(Localisation)))
+        return Conge.findAll().then((jours: congeId[]) => jours.map((jour) => CongeMapper.mapToDto(jour)))
     }
     create(t: CongeDTO): Promise<CongeDTO> {
         return Conge.create(t).then((user: congeId) => CongeMapper.mapToDto(user))

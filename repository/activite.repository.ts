@@ -9,7 +9,7 @@ export class ActiviteRepository implements IRepository<activiteDTO> {
         return Activity.findByPk(id).then((Localisation: activityId | null) => ActiviteMapper.mapToDto(Localisation))
     }
     async findAll(): Promise<activiteDTO[]> {
-        return Activity.findAll().then((Localisations: activityId[]) => Localisations.map((Localisation: activityId) => ActiviteMapper.mapToDto(Localisation)))
+        return Activity.findAll().then((Localisations: activityId[]) => Localisations.map((Localisation) => ActiviteMapper.mapToDto(Localisation)))
     }
     async create(t: activiteDTO): Promise<activiteDTO> {
         return Activity.create(t).then((user: activityId) => ActiviteMapper.mapToDto(user))

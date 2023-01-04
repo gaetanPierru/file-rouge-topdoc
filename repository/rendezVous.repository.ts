@@ -10,10 +10,10 @@ export class RendezVousRepository implements IRepository<RendezVousDTO> {
         return RendezVous.findByPk(id).then((RendezVous: rendezVousId | null) => RendezVousMapper.mapToDto(RendezVous))
     }
     findAll(): Promise<RendezVousDTO[]> {
-        return RendezVous.findAll().then((RendezVouss: rendezVousId[]) => RendezVouss.map((RendezVous: rendezVousId) => RendezVousMapper.mapToDto(RendezVous)))
+        return RendezVous.findAll().then((RendezVouss: rendezVousId[]) => RendezVouss.map((RendezVous) => RendezVousMapper.mapToDto(RendezVous)))
     }
     create(t: RendezVousDTO): Promise<RendezVousDTO> {
-        return RendezVous.create(t).then((user: rendezVousId) => RendezVousMapper.mapToDto(user))
+        return RendezVous.create(t).then((rendezVous: rendezVousId) => RendezVousMapper.mapToDto(rendezVous))
     }
     delete(id: number): Promise<number |boolean> {
         return RendezVous.destroy({where: {id: id}}).then((good: boolean) => good)

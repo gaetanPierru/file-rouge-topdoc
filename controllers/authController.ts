@@ -56,7 +56,6 @@ authController.post('/login', async (req, res) => {
                     if (token == null) {
                         Token.create({
                             refreshToken: refreshToken,
-                            tokenPush: refreshToken,
                             UserId: user.id
                         })
                     } else {

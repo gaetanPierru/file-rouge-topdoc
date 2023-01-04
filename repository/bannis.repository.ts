@@ -6,10 +6,10 @@ import { bannisId } from "../types/bannis";
 
 export class BannisRepository implements IRepository<BannisDTO> {
     findById(id: number): Promise<BannisDTO | null> {
-        return Bannis.findByPk(id).then((Localisation: bannisId | null) => BannisMapper.mapToDto(Localisation))
+        return Bannis.findByPk(id).then((bannis: bannisId | null) => BannisMapper.mapToDto(bannis))
     }
     findAll(): Promise<BannisDTO[]> {
-        return Bannis.findAll().then((Localisations: bannisId[]) => Localisations.map((Localisation: bannisId) => BannisMapper.mapToDto(Localisation)))
+        return Bannis.findAll().then((bannis: bannisId[]) => bannis.map((bannis) => BannisMapper.mapToDto(bannis)))
     }
     create(t: BannisDTO): Promise<BannisDTO> {
         return Bannis.create(t).then((user: bannisId) => BannisMapper.mapToDto(user))

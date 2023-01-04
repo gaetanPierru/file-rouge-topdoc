@@ -9,10 +9,10 @@ export class LocalisationRepository implements IRepository<localisationDTO> {
         return Localisation.findByPk(id).then((Localisation: localisationId | null) => LocalisationMapper.mapToDto(Localisation))
     }
     findAll(): Promise<localisationDTO[]> {
-        return Localisation.findAll().then((Localisations: localisationId[]) => Localisations.map((Localisation: localisationId) => LocalisationMapper.mapToDto(Localisation)))
+        return Localisation.findAll().then((Localisations: localisationId[]) => Localisations.map((Localisation) => LocalisationMapper.mapToDto(Localisation)))
     }
     create(t: localisationDTO): Promise<localisationDTO> {
-        return Localisation.create(t).then((user: localisationId) => LocalisationMapper.mapToDto(user))
+        return Localisation.create(t).then((localisation: localisationId) => LocalisationMapper.mapToDto(localisation))
     }
     delete(id: number): Promise<number |boolean> {
         return Localisation.destroy({where: {id: id}}).then((good: boolean) => good)

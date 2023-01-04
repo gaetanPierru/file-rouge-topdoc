@@ -10,7 +10,7 @@ export class UserRepository implements IRepository<userDTO> {
     }
 
     async findAll(): Promise<userDTO[]> {
-       return User.findAll().then((users: User[]) => users.map((user: User) => UserMapper.mapToDto(user)))
+       return User.findAll().then((users: User[]) => users.map((user) => UserMapper.mapToDto(user)))
     }
     async create(t: Omit<User, 'id'>): Promise<userDTO | null> {
         try {

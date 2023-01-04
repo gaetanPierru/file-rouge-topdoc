@@ -9,10 +9,10 @@ export class RoleRepository implements IRepository<roleDTO> {
         return Role.findByPk(id).then((role: roleId | null) => RoleMapper.mapToDto(role))
     }
     findAll(): Promise<roleDTO[]> {
-        return Role.findAll().then((roles: roleId[]) => roles.map((role: roleId) => RoleMapper.mapToDto(role)))
+        return Role.findAll().then((roles: roleId[]) => roles.map((role) => RoleMapper.mapToDto(role)))
     }
     create(t: roleTypes): Promise<roleDTO> {
-        return Role.create(t).then((user: roleId) => RoleMapper.mapToDto(user))
+        return Role.create(t).then((role: roleId) => RoleMapper.mapToDto(role))
     }
     delete(id: number): Promise<number |boolean> {
         return Role.destroy({where: {id: id}}).then((good: boolean) => good)

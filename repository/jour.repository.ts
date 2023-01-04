@@ -6,10 +6,10 @@ import { jourId } from "../types/jour";
 
 export class JourRepository implements IRepository<JourDTO> {
     findById(id: number): Promise<JourDTO | null> {
-        return Jour.findByPk(id).then((Localisation: jourId | null) => JourMapper.mapToDto(Localisation))
+        return Jour.findByPk(id).then((jour: jourId | null) => JourMapper.mapToDto(jour))
     }
     findAll(): Promise<JourDTO[]> {
-        return Jour.findAll().then((Localisations: jourId[]) => Localisations.map((Localisation: jourId) => JourMapper.mapToDto(Localisation)))
+        return Jour.findAll().then((jour: jourId[]) => jour.map((jour) => JourMapper.mapToDto(jour)))
     }
     create(t: JourDTO): Promise<JourDTO> {
         return Jour.create(t).then((user: jourId) => JourMapper.mapToDto(user))

@@ -9,7 +9,7 @@ export class PlanningRepository implements IRepository<PlanningDTO> {
         return Planning.findByPk(id).then((Localisation: planningId | null) => PlanningMapper.mapToDto(Localisation))
     }
     findAll(): Promise<PlanningDTO[]> {
-        return Planning.findAll().then((Localisations: planningId[]) => Localisations.map((Localisation: planningId) => PlanningMapper.mapToDto(Localisation)))
+        return Planning.findAll().then((plannings: planningId[]) => plannings.map((planning) => PlanningMapper.mapToDto(planning)))
     }
     create(t: PlanningDTO): Promise<PlanningDTO> {
         return Planning.create(t).then((user: planningId) => PlanningMapper.mapToDto(user))
