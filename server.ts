@@ -3,6 +3,7 @@ import { Response, Request } from 'express';
 import { apiController } from './controllers/apiController';
 import { initDb } from './database/connect';
 import cors from 'cors';
+import helmet from 'helmet';
 
 const express = require("express")
 const app = express()
@@ -11,8 +12,8 @@ const port = process.env.PORT || 5000
 // todo mettre dans un fichier a part //
 import morgan from 'morgan';
 import path from 'path';
-const rfs = require("rotating-file-stream")
-if (process.env.Prod){
+if (process.env.Prod == "prod"){
+    const rfs = require("rotating-file-stream")
     const accesLogStream = rfs.createStream("log.log", {
         interval: '1d',
         compress: "gzip",
@@ -34,6 +35,7 @@ app.disable('x-powered-by');
 // initDb()
 //
 
+app.use(helmet());
 app.use(cors())
 app.use(express.json())
 
