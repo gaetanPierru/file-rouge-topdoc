@@ -9,14 +9,19 @@ export class AuthService implements IServiceToken<AuthDTO, userLoginDTO> {
     constructor(_authRepo: IRepositoryAuth<AuthDTO, userLoginDTO>) {
         this.authRepo =_authRepo;
     }
-    findUsers(): Promise<userLoginDTO[]> {
-        return this.authRepo.findUsers().then(users => {
-            return users
+    findUT(id: number): Promise<userLoginDTO | null> {
+        return this.authRepo.findUserToken(id).then(user => {
+            return user
+        })
+    }
+    findUser(email: string): Promise<userLoginDTO | null> {
+        return this.authRepo.findUser(email).then(user => {
+            return user
         })
     }
 
-    findAll(): Promise<AuthDTO[]> {
-        return this.authRepo.findAll().then(authdto => {
+    findToken(t: string): Promise<AuthDTO | null> {
+        return this.authRepo.findToken(t).then(authdto => {
             return authdto
         })
     }

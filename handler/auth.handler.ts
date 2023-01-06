@@ -16,8 +16,7 @@ export class AuthHandler {
         try {
             const refreshToken = req.body.token
             if (refreshToken == null) return res.sendStatus(401)
-            const tokens = await this.authService.findAll();
-            const token = tokens.find((token) => token.refreshToken == refreshToken);
+            const token = await this.authService.findToken(refreshToken);
 
             if (token == null) return res.sendStatus(403)
 
@@ -34,8 +33,7 @@ export class AuthHandler {
     login = async (req: Request, res: Response) => {
 
         try {
-            const users = await this.authService.findUsers();
-            const user = users?.find((user) => user.email == req.body.email)
+            const user = await this.authService.findUser(req.body.email);
 
             if (user == null) {
                 return res.status(401).json({ userFound: false, message: "utilisateur non trouvé" })
@@ -46,8 +44,7 @@ export class AuthHandler {
                 const refreshToken = jwt.sign({ name: user.id }, process.env.REFRESH_TOKEN_SECRET!, { expiresIn: '1Y' })
 
 
-                const tokens = await this.authService.findAll();
-                const token = tokens.find((token) => token.userId == user.id)
+                const token = await this.authService.findUT(user.id);
 
                 if (token == null) {
                     await this.authService.create({ refreshToken: refreshToken, userId: user.id })
@@ -60,7 +57,7 @@ export class AuthHandler {
                 return res.status(401).json({ successfullLogin: false, message: 'non connecter' })
             }
         } catch (error) {
-            return res.status(500).json("pas access a la base de donnée")
+            return res.status(500).json(error)
         }
 
     }

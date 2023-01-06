@@ -7,8 +7,11 @@ import { userId } from "../types/user";
 import { IRepositoryAuth } from "./core/repository.interface";
 
 export class AuthRepository implements IRepositoryAuth<AuthDTO, userLoginDTO> {
-    findUsers(): Promise<userLoginDTO[]> {
-        return User.findAll().then((users: any) => users.map((user: userId) => AuthMapper.mapToLoginDto(user)))
+    findUser(email: string): Promise<userLoginDTO | null> {
+        return User.findOne({where: {email: email}}).then((user: any) => AuthMapper.mapToLoginDto(user))
+    }
+    findUserToken(id: number): Promise<userLoginDTO | null> {
+        return Token.findOne({where: {UserId: id}}).then((token: any) => AuthMapper.mapToDto(token))
     }
     create(t: AuthDTO): Promise<AuthDTO | null> {
         return Token.create(t).then((token: tokenId) => AuthMapper.mapToDto(token))
@@ -16,7 +19,7 @@ export class AuthRepository implements IRepositoryAuth<AuthDTO, userLoginDTO> {
     update(t: AuthDTO, id: number): Promise<number | boolean> {
         return Token.update(t, {where: {userId: id}}).then(((good: boolean[]) => good[0]))
     }
-    findAll(): Promise<AuthDTO[]> {
-        return Token.findAll().then((tokens: tokenId[]) => tokens.map((token) => AuthMapper.mapToDto(token)))
+    findToken(t: string): Promise<AuthDTO | null> {
+        return Token.findOne({where: {refreshToken: t}}).then((token: any) => AuthMapper.mapToDto(token))
     }
 }

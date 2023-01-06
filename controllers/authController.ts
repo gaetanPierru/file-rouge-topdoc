@@ -10,8 +10,6 @@ const jwt = require('jsonwebtoken')
 
 const authController = Router();
 
-// TODO MOVE TO HANDLER
-
 /**
  * @swagger
  * tags:
@@ -78,6 +76,7 @@ authController.post('/token', authHandler.token)
   *          description: Login. Returns tokens if successful login.
   */
  authController.post('/loginAdmin', async (req, res) => {
+
     User.findAll({ include: [
         {
             model : Role,

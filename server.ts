@@ -5,20 +5,38 @@ import { initDb } from './database/connect';
 import cors from 'cors';
 
 const express = require("express")
-
 const app = express()
+const port = process.env.PORT || 5000
+
+// todo mettre dans un fichier a part //
+import morgan from 'morgan';
+import path from 'path';
+const rfs = require("rotating-file-stream")
+if (process.env.Prod){
+    const accesLogStream = rfs.createStream("log.log", {
+        interval: '1d',
+        compress: "gzip",
+        maxFiles: 10,
+        path: path.join(__dirname, 'log')
+    })
+    app.use(morgan('combined', { stream: accesLogStream}))
+}else {
+    app.use(morgan('dev', {
+        skip: function (req, res) { return res.statusCode < 400 }
+      }))
+}
+
+////////////////////////////
+
 app.disable('x-powered-by');
 
 // Pour recréer DB, à commenter sinon
 // initDb()
-
 //
 
 app.use(cors())
 app.use(express.json())
 
-
-const port = process.env.PORT || 5000
 
 app.get("/", (req: Request, res: Response) => {
     res.send("SWAGGER : /api/docs")
