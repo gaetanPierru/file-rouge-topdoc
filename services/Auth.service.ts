@@ -1,18 +1,22 @@
 import { AuthDTO } from "../DTO/auth.dto";
+import { userLoginDTO } from "../DTO/user.dto";
 import { IRepositoryAuth } from "../repository/core/repository.interface";
 import { IServiceToken } from "./core/service.interface";
+export class AuthService implements IServiceToken<AuthDTO, userLoginDTO> {
 
-export class AuthService implements IServiceToken<AuthDTO> {
+    private authRepo: IRepositoryAuth<AuthDTO, userLoginDTO>;
 
-    private authRepo: IRepositoryAuth<AuthDTO>;
-
-    constructor(_authRepo: IRepositoryAuth<AuthDTO>) {
+    constructor(_authRepo: IRepositoryAuth<AuthDTO, userLoginDTO>) {
         this.authRepo =_authRepo;
     }
+    findUsers(): Promise<userLoginDTO[]> {
+        return this.authRepo.findUsers().then(users => {
+            return users
+        })
+    }
 
-    findAll(): Promise<AuthDTO[] | null> {
+    findAll(): Promise<AuthDTO[]> {
         return this.authRepo.findAll().then(authdto => {
-            if(authdto === null) return null;
             return authdto
         })
     }

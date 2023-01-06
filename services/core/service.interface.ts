@@ -6,8 +6,9 @@ export interface IService<T> {
     update(t: T, id: number): Promise<number |boolean>;
 }
 
-export interface IServiceToken<T> {
-    findAll(): Promise<T[] | null>;
-    create(t: T): Promise<T | null>;
-    update(t: T, id: number): Promise<number |boolean>;
+export interface IServiceToken<T, D> {
+    findAll(): Promise<T[]>;
+    create(t: Omit<T, 'id'>): Promise<T | null>;
+    update(t: Partial<T>, id: number): Promise<number |boolean>;
+    findUsers(): Promise<D[]>; 
 }

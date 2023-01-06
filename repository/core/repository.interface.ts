@@ -11,8 +11,9 @@ export interface ISpecial<T> {
     findAll(): Promise<T[]>;
 }
 
-export interface IRepositoryAuth<T> {
+export interface IRepositoryAuth<T, D> {
     create(t: T): Promise<T | null>;
     update(t: T, id: number): Promise<number |boolean>;
     findAll(): Promise<T[]>;
+    findUsers(): Promise<D[]>
 }

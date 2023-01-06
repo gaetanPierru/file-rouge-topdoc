@@ -1,6 +1,5 @@
 import { Router } from "express";
 import { usersController } from "./userController"
-import { tokenController } from "./tokenController"
 import { roleController } from "./roleController"
 import { localisationController } from './localisationController';
 import { authController } from "./authController";
@@ -36,7 +35,6 @@ const swaggerDocs = swaggerJsDoc(swaggerOptions)
 
 apiController.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs))
 apiController.use('/users', usersController)
-apiController.use('/tokens', tokenController)
 apiController.use('/roles', roleController)
 apiController.use('/localisations', localisationController)
 apiController.use('/auth', authController)

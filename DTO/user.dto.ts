@@ -7,8 +7,14 @@ export interface userDTO {
     telephone: string
 }
 
+export interface userLoginDTO {
+    id: number,
+    email: string,
+    mot_de_passe: string;
+}
+
 export interface userFullDTO extends userDTO {
-    localisation : {
+    localisation: {
         numero_de_rue: number;
         address: string;
         code_postal: number;
