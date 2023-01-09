@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { IService, IServiceToken } from "../services/core/service.interface";
+import { IServiceToken } from "../services/core/service.interface";
 import { AuthDTO } from "../DTO/auth.dto";
 import { userLoginDTO } from "../DTO/user.dto";
 import bcrypt from 'bcrypt';

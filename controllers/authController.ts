@@ -2,7 +2,6 @@ import { Router } from "express";
 import {Token, Role } from "../database/connect";
 import { ApiException } from "../types/exception";
 import { tokenTypes } from "../types/token";
-import { userTypes } from "../types/user";
 import bcrypt from 'bcrypt'
 import { User } from "../models/users";
 import { authHandler } from "../inject";
