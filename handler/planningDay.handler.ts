@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import { Jour } from "../database/connect";
 import { PlanningFullDTO } from "../DTO/planning.dto";
 import { IServicePlanning } from "../services/core/service.interface";
 
@@ -46,32 +47,36 @@ export class PlanningDayHandler {
                     return {name: dayName, minutes: minutejour, nbCrenaux: nbCrenaux, crenaux: crenauxTab}
                 })
 
-
-
-
-                console.log(planning.jour[0].crenaux) //.jour[0].crenaux
-
-
                 const today = new Date();
                 let dates: any = [];
-                for (let i = 0; i < 7; i++) {
+                for (let i = 0; i < 20; i++) {
                     const date = new Date(today);
                     date.setDate(date.getDate() + i);
                     dates.push(date);
                 }
-                console.log(dates[1].toLocaleDateString("fr-FR", {
-                    weekday: "long",
-                    year: "numeric",
-                    month: "long",
-                    day: "numeric",
-                  }))
 
-                //   dates[0] = planning.jour.find()
+                  let test = dates.map((date: Date) => {
+                    const a = date.toLocaleDateString("fr-FR", {
+                        weekday: "long",
+                        year: "numeric",
+                        month: "long",
+                        day: "numeric",
+                      })
+
+                    const crenaux = planning.jour.find((jour:any) => jour.name == a.split(' ')[0])
+
+                    const crenauxday = {jour: a, crenaux: crenaux}
+
+                    return crenauxday
+
+                  })
+                  console.log('jour', test[0].jour, 'crenaux', test[0].crenaux);
+
                 
                  
 
                   
-
+                
 
 
 
