@@ -9,6 +9,7 @@ import { bannisController } from "./bannisController";
 import { congeController } from "./congeController";
 import { jourController } from "./jourController";
 import { planningController } from "./planningController";
+import { PlanningDayController } from "./planningDayController";
 
 const swaggerJsDoc = require('swagger-jsdoc')
 const swaggerUi = require('swagger-ui-express')
@@ -44,5 +45,6 @@ apiController.use('/bannis', bannisController)
 apiController.use('/conge', congeController)
 apiController.use('/jour', jourController)
 apiController.use('/planning', planningController)
+apiController.use('/planningJour', PlanningDayController)
 
 export { apiController }

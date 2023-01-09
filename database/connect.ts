@@ -76,8 +76,8 @@ Activity.belongsTo(Localisation, { onDelete: 'cascade', hooks: true })
 Role.belongsToMany(User, { through: RoleUser })
 User.belongsToMany(Role, { through: RoleUser })
 
-Planning.belongsToMany(User, { through: jourPlanning })
-Jour.belongsToMany(Role, { through: jourPlanning })
+Planning.belongsToMany(Jour, { through: jourPlanning })
+Jour.belongsToMany(Planning, { through: jourPlanning })
 
 Bannis.belongsToMany(User, { through: BanUser })
 User.belongsToMany(Bannis, { through: BanUser })

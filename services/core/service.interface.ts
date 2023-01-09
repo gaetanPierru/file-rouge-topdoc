@@ -13,3 +13,10 @@ export interface IServiceToken<T, D> {
     findUser(email: string): Promise<D | null>;
     findUT(id: number): Promise<D | null>; 
 }
+
+export interface IServicePlanning<T> {
+    findById(id: number): Promise<T | null>;
+    create(t: Omit<T, 'id'>): Promise<T | null>;
+    update(t: Partial<T>, id: number): Promise<number |boolean>;
+    delete(id: number): Promise<number |boolean>;
+}
