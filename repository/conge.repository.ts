@@ -11,7 +11,7 @@ export class CongeRepository implements IRepository<CongeDTO> {
     findAll(): Promise<CongeDTO[]> {
         return Conge.findAll().then((jours: congeId[]) => jours.map((jour) => CongeMapper.mapToDto(jour)))
     }
-    create(t: CongeDTO): Promise<CongeDTO> {
+    create(t: any): Promise<CongeDTO> {
         return Conge.create(t).then((user: congeId) => CongeMapper.mapToDto(user))
     }
     delete(id: number): Promise<number |boolean> {

@@ -22,16 +22,16 @@ export class PlanningDayHandler {
 
         try {
             if (Number.isInteger(id)) {
-                const planningBrut = await this.planningDayService.findById(id);
+                const planningBrut: any = await this.planningDayService.findById(id);
                 if (planningBrut === null) return res.status(404).send()
 
                 let planning: any = {}
 
-                planning.name = planningBrut.nom_planning
-                planning.dateDebut = planningBrut.date_debut_planning
-                planning.durée = planningBrut.duree_validite_calendrier
+                planning.name = planningBrut.planning.nom_planning
+                planning.dateDebut = planningBrut.planning.date_debut_planning
+                planning.durée = planningBrut.planning.duree_validite_calendrier
 
-                planning.jour = planningBrut.Jours.map((jour) => {
+                planning.jour = planningBrut.planning.Jours.map((jour: any) => {
                     const dayName = jourDeLaSemaine(jour.jour);
                     
                     const minutejour = (jour.heure_fin_journee.getTime() - jour.heure_debut_journee.getTime()) / (1000 * 60);
@@ -44,7 +44,10 @@ export class PlanningDayHandler {
                     }
                     crenauxTab.push( new Date(jour.heure_fin_journee.getTime()).toLocaleTimeString() )
 
-                    return {name: dayName, minutes: minutejour, nbCrenaux: nbCrenaux, crenaux: crenauxTab}
+
+
+                    
+                    return {name: dayName, crenaux: crenauxTab}
                 })
 
                 const today = new Date();
@@ -65,19 +68,42 @@ export class PlanningDayHandler {
 
                     const crenaux = planning.jour.find((jour:any) => jour.name == a.split(' ')[0])
 
-                    const crenauxday = {jour: a, crenaux: crenaux}
+                    let congee;
+
+                    congee = planningBrut.conge.map((conge: any) => {
+                           return (new Date(conge.date_fin) >= date && new Date(conge.date_debut) <= date)
+                       } )
+
+                    // console.log("CONGE", congee);
+
+                    // let newCrenauxTab: any;
+
+                    // console.log("LONGUEEEEEEUUUUUUUR", crenauxTab.length);
+                    
+
+                    // for(let i = 0 ; i < crenauxTab.length; i++) {
+                    //     if( i+1 <= crenauxTab.length) {
+                    //         console.log("RDV", planningBrut.rdv[0].date_rendez_vous);
+                    //         console.log("RDV HEURE", crenauxTab[0]);
+                            
+                    //         newCrenauxTab.push({heureDebut: crenauxTab[i], heureFin: crenauxTab[i+1]})
+                    //     }
+                    // }
+                    
+                    const crenauxday = {jour: a, crenaux: crenaux, conge: congee[0]}
 
                     return crenauxday
 
                   })
-                  console.log('jour', test[0].jour, 'crenaux', test[0].crenaux);
+
+                  console.log('jour', test[0].jour, 'crenaux', test[0].crenaux, 'conge', test[0].conge);
 
                 
                  
 
                   
-                
-
+                let planningfini;
+                 
 
 
 
