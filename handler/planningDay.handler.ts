@@ -1,5 +1,4 @@
 import { Request, Response } from "express";
-import { Jour } from "../database/connect";
 import { PlanningFullDTO } from "../DTO/planning.dto";
 import { IServicePlanning } from "../services/core/service.interface";
 import { rendezVousId } from "../types/rendezVous";

@@ -1,10 +1,10 @@
-import { IRepository, IRepositoryPlanning } from "./core/repository.interface";
-import { PlanningDTO, PlanningFullDTO } from "../DTO/planning.dto";
-import { Conge, Jour, Planning, RendezVous } from "../database/connect";
+import { IRepositoryPlanning } from "./core/repository.interface";
+import { PlanningFullDTO } from "../DTO/planning.dto";
+import { Conge, Jour, Planning, RendezVous, jourPlanning } from "../database/connect";
 import { PlanningMapper } from "../mapper/planning.mapper";
-import { planningId } from "../types/planning";
-import { now } from "sequelize/types/utils";
 import { Op } from "sequelize";
+import { sequelize } from "../database/acces";
+import { jourTypes } from "../types/jour";
 
 export class PlanningDayRepository implements IRepositoryPlanning<PlanningFullDTO> {
     async findById(id: number): Promise<any | null> {
@@ -34,8 +34,24 @@ export class PlanningDayRepository implements IRepositoryPlanning<PlanningFullDT
 
         return { planning: planningJour, conge: conge, rdv: rdv }
     }
-    create(t: Omit<PlanningFullDTO, "id">): Promise<PlanningFullDTO | null> {
-        throw new Error("Method not implemented.");
+    async create(t: any): Promise<PlanningFullDTO | null> {
+
+        try {
+            
+            const newPlanning = await Planning.create({
+                ...t.planning, jours: t.Jours
+            }, {
+                include: 'jours'
+            })
+
+            return newPlanning
+        } catch (error) {
+            console.log(error);
+            
+            return error as any
+        }
+        
+
     }
     update(t: Partial<PlanningFullDTO>, id: number): Promise<number | boolean> {
         throw new Error("Method not implemented.");

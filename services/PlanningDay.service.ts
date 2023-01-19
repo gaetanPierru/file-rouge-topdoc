@@ -1,4 +1,4 @@
-import { PlanningFullDTO } from "../DTO/planning.dto";
+import { PlanningComplet, PlanningFullDTO } from "../DTO/planning.dto";
 import { IRepository, IRepositoryPlanning } from "../repository/core/repository.interface";
 import { planningTypes } from "../types/planning";
 import { IServicePlanning } from "./core/service.interface";
@@ -17,7 +17,7 @@ export class PlanningDayService implements IServicePlanning<PlanningFullDTO>{
         })
     }
 
-    async create(Planning: PlanningFullDTO): Promise<PlanningFullDTO | null> {
+    async create(Planning: any): Promise<PlanningFullDTO | null> {
         return this.PlanningRepository.create(Planning).then(PlanningDTO => {
             if(PlanningDTO === null) return null;
             return PlanningDTO

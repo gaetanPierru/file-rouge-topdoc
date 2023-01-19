@@ -50,7 +50,7 @@ PlanningDayController.delete("/:id", planningDayHandler.deletePlanning)
   * /api/planningJour:
   *  post:
   *      tags: [Planning Jour]
-  *      description: Add an activite
+  *      description: Add an Planning
   *      consumes:
   *       - application/json
   *      parameters:
@@ -58,7 +58,7 @@ PlanningDayController.delete("/:id", planningDayHandler.deletePlanning)
   *         in: body
   *         required: true
   *         type: object
-  *         default: { "fonction":"string","description": "description", "type": "type","estActif": true, "LocalisationId": 1 }
+  *         default: {"planning":{"nom_planning":"courant","date_debut_planning":"2023-01-11","duree_validite_calendrier":6,"activiteId":1},"Jours":[{"jour":1,"heure_debut_journee":"2022-01-01T07:30:00.000Z","heure_fin_journee":"2022-01-01T17:30:00.000Z","duree_crenaux":30},{"jour":2,"heure_debut_journee":"2022-01-01T07:30:00.000Z","heure_fin_journee":"2022-01-01T17:30:00.000Z","duree_crenaux":30},{"jour":3,"heure_debut_journee":"2022-01-01T07:30:00.000Z","heure_fin_journee":"2022-01-01T17:30:00.000Z","duree_crenaux":30},{"jour":4,"heure_debut_journee":"2022-01-01T07:30:00.000Z","heure_fin_journee":"2022-01-01T17:30:00.000Z","duree_crenaux":30},{"jour":5,"heure_debut_journee":"2022-01-01T07:30:00.000Z","heure_fin_journee":"2022-01-01T17:30:00.000Z","duree_crenaux":30},{"jour":6,"heure_debut_journee":"2022-01-01T07:30:00.000Z","heure_fin_journee":"2022-01-01T17:30:00.000Z","duree_crenaux":30},{"jour":7,"heure_debut_journee":"2022-01-01T07:00:00.000Z","heure_fin_journee":"2022-01-01T17:30:00.000Z","duree_crenaux":30}]}
   *      responses:
   *        200:
   *          description: Create a new user.
