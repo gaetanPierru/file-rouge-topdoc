@@ -34,6 +34,7 @@ export class PlanningDayRepository implements IRepositoryPlanning<PlanningFullDT
 
         return { planning: planningJour, conge: conge, rdv: rdv }
     }
+
     async create(t: any): Promise<PlanningFullDTO | null> {
 
         try {

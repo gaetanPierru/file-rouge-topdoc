@@ -57,7 +57,6 @@ export class PlanningDayHandler {
                 let test = dates.map((date: Date) => {
                     const a = date.toLocaleDateString("fr-FR", {
                         weekday: "long",
-                        year: "numeric",
                         month: "long",
                         day: "numeric",
                     })
@@ -109,7 +108,12 @@ export class PlanningDayHandler {
                 const verif = 0
                 console.log('jour', test[verif].jour, 'crenaux', test[verif].crenaux, 'conge', test[verif].conge);
 
-                return res.status(200).json(planningBrut)
+                let planningFinal = {
+                    name: planningBrut.planning.nom_planning,
+                    days: test
+                }
+
+                return res.status(200).json(planningFinal)
             }
 
         } catch (err) {
