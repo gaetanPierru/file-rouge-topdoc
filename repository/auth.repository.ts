@@ -17,7 +17,7 @@ export class AuthRepository implements IRepositoryAuth<AuthDTO, userLoginDTO> {
         return Token.create(t).then((token: tokenId) => AuthMapper.mapToDto(token))
     }
     update(t: AuthDTO, id: number): Promise<number | boolean> {
-        return Token.update(t, {where: {userId: id}}).then(((good: boolean[]) => good[0]))
+        return Token.update(t, {where: {UserId: id}}).then(((good: boolean[]) => good[0]))
     }
     findToken(t: string): Promise<AuthDTO | null> {
         return Token.findOne({where: {refreshToken: t}}).then((token: any) => AuthMapper.mapToDto(token))

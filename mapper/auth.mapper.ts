@@ -7,7 +7,7 @@ export class AuthMapper {
     static mapToDto(auth: tokenId): AuthDTO | null {
         if (auth === null) return null;
         const dto : AuthDTO = {
-            userId: auth.UserId,
+            UserId: auth.UserId,
             refreshToken: auth.refreshToken
         }
 

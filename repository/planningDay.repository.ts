@@ -1,11 +1,14 @@
 import { IRepositoryPlanning } from "./core/repository.interface";
 import { PlanningFullDTO } from "../DTO/planning.dto";
-import { Conge, Jour, Planning, RendezVous } from "../database/connect";
+import User, { Conge, Jour, Planning, RendezVous } from "../database/connect";
 import { PlanningMapper } from "../mapper/planning.mapper";
 import { Op } from "sequelize";
 
 export class PlanningDayRepository implements IRepositoryPlanning<PlanningFullDTO> {
     async findById(id: number): Promise<any | null> {
+
+        //TODO FAIRE PLUSIEURS REQUETE DANS LE SERVICE AU LIEUX DE FAIRE 3 AWAIT avec un awaitall
+
         const planningJour: any = await Planning.findByPk(id, {
             include: [
                 {
@@ -27,7 +30,12 @@ export class PlanningDayRepository implements IRepositoryPlanning<PlanningFullDT
             where: {
                 planningId: id,
                 date_rendez_vous: { [Op.gte]: new Date()}
-            }
+            }, include: [
+                {
+                    model: User,
+                    require: true
+                }
+            ]
         })
 
         return { planning: planningJour, conge: conge, rdv: rdv }

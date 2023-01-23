@@ -22,7 +22,7 @@ export class AuthHandler {
 
             jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET!, (err: any) => {
                 if (err) return res.sendStatus(403)
-                const accessToken = jwt.sign({ id: token.userId }, process.env.ACCESS_TOKEN_SECRET!, { expiresIn: '15s' })
+                const accessToken = jwt.sign({ id: token.UserId }, process.env.ACCESS_TOKEN_SECRET!, { expiresIn: '15s' })
                 res.json({ accessToken: accessToken })
             })
         } catch (err) {
@@ -47,7 +47,7 @@ export class AuthHandler {
                 const token = await this.authService.findUT(user.id);
 
                 if (token == null) {
-                    await this.authService.create({ refreshToken: refreshToken, userId: user.id })
+                    await this.authService.create({ refreshToken: refreshToken, UserId: user.id })
                 } else {
                     await this; this.authService.update({ refreshToken: refreshToken }, user.id)
                 }

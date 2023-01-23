@@ -18,6 +18,9 @@ export class PlanningDayService implements IServicePlanning<PlanningFullDTO>{
     }
 
     async findById(id: number): Promise<PlanningFullDTO | null> {
+
+        //TODO METTRE DANS DIFFERENTES FONCTIONS
+
         return this.PlanningRepository.findById(id).then((planningBrut: any) => {
             if(planningBrut === null) return null;
 
@@ -106,6 +109,7 @@ export class PlanningDayService implements IServicePlanning<PlanningFullDTO>{
             const verif = 0
             console.log('jour', test[verif].jour, 'crenaux', test[verif].crenaux, 'conge', test[verif].conge);
 
+            // TODO BIEN FAIRE LE DTO ET LE MAPPER
             let planningFinal = {
                 name: planningBrut.planning.nom_planning,
                 days: test
