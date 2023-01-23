@@ -1,10 +1,8 @@
 import { IRepositoryPlanning } from "./core/repository.interface";
 import { PlanningFullDTO } from "../DTO/planning.dto";
-import { Conge, Jour, Planning, RendezVous, jourPlanning } from "../database/connect";
+import { Conge, Jour, Planning, RendezVous } from "../database/connect";
 import { PlanningMapper } from "../mapper/planning.mapper";
 import { Op } from "sequelize";
-import { sequelize } from "../database/acces";
-import { jourTypes } from "../types/jour";
 
 export class PlanningDayRepository implements IRepositoryPlanning<PlanningFullDTO> {
     async findById(id: number): Promise<any | null> {
