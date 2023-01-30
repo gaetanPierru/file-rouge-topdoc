@@ -1,15 +1,25 @@
 import { IRepository } from "./core/repository.interface";
-import { Activity } from "../database/connect";
-import { activiteDTO } from "../DTO/activite.dto";
+import { Activity, Planning } from "../database/connect";
+import { activiteDTO, activiteDTOFull } from "../DTO/activite.dto";
 import { activityId } from "../types/activity";
 import { ActiviteMapper } from "../mapper/activite.mapper";
 
 export class ActiviteRepository implements IRepository<activiteDTO> {
     async findById(id: number): Promise<activiteDTO | null> {
-        return Activity.findByPk(id).then((Localisation: activityId | null) => ActiviteMapper.mapToDto(Localisation))
+        return Activity.findByPk(id, {include: [
+            {
+                model: Planning,
+                required: true,
+            },
+        ]}).then((Localisation: activiteDTOFull | null) => ActiviteMapper.mapToDtoFull(Localisation))
     }
     async findAll(): Promise<activiteDTO[]> {
-        return Activity.findAll().then((Localisations: activityId[]) => Localisations.map((Localisation) => ActiviteMapper.mapToDto(Localisation)))
+        return Activity.findAll({include: [
+            {
+                model: Planning,
+                required: true,
+            },
+        ]}).then((Localisations: activiteDTOFull[]) => Localisations.map((Localisation) => ActiviteMapper.mapToDtoFull(Localisation)))
     }
     async create(t: activiteDTO): Promise<activiteDTO> {
         return Activity.create(t).then((user: activityId) => ActiviteMapper.mapToDto(user))

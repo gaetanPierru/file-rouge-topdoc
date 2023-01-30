@@ -1,6 +1,6 @@
 import { activiteDTO } from "../DTO/activite.dto";
 import { IRepository } from "../repository/core/repository.interface";
-import { activityTypes } from "../types/activity";
+import { activityId, activityTypes } from "../types/activity";
 import { IService } from "./core/service.interface";
 
 export class ActiviteService implements IService<activiteDTO>{
@@ -24,7 +24,7 @@ export class ActiviteService implements IService<activiteDTO>{
         })
     }
 
-    async create(activite: activityTypes): Promise<activiteDTO | null> {
+    async create(activite: activityId): Promise<activiteDTO | null> {
         return this.activiteRepository.create(activite).then(activiteDTO => {
             if(activiteDTO === null) return null;
             return activiteDTO
@@ -37,7 +37,7 @@ export class ActiviteService implements IService<activiteDTO>{
         })
     }
 
-    async update(activite: activityTypes, id: number): Promise<number |boolean> {
+    async update(activite: activityId, id: number): Promise<number |boolean> {
         return this.activiteRepository.update(activite,id).then(good => good)
     }
 }

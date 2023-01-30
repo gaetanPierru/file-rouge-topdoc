@@ -1,4 +1,5 @@
 export interface activiteDTO {
+    id: number;
     fonction: string;
     description: string;
     type: string;
@@ -10,4 +11,11 @@ export interface activiteFullDTO extends activiteDTO {
     address: string;
     code_postal: number;
     ville: string;
+}
+
+export interface activiteDTOFull extends activiteDTO {
+    planning : {
+        id: number;
+        nom_planning: string;
+    }
 }

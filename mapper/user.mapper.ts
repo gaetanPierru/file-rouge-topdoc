@@ -3,11 +3,12 @@ import { User } from "../models/users";
 import { userId } from "../types/user";
 
 export class UserMapper {
-    static mapToDto(user: User |null): userDTO {
+    static mapToDto(user: userId |null): userDTO {
         if (user === null){
             return null as any;
         } 
         const dto : userDTO = {
+            id: user.id,
             nom: user.nom,
             prenom: user.prenom,
             genre: user.genre,

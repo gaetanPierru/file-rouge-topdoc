@@ -1,4 +1,5 @@
 import { jourTypes } from "../types/jour";
+import { rendezVousId } from "../types/rendezVous";
 import { JourDTO } from "./jour.dto";
 
 export interface PlanningDTO {
@@ -13,11 +14,18 @@ export interface PlanningFullDTO extends PlanningDTO {
 }
 
 export interface PlanningComplet {
-  planning: {
-    nom_planning: string;
-    date_debut_planning: Date;
-    duree_validite_calendrier: number;
-    activiteId: number;
-    Jours : jourTypes[]
-  }
+  name: any;
+  days: {
+        jour: string;
+        conge: boolean;
+        crenaux: ({
+          heureDebut: string;
+          heureFin: string;
+          rdv: rendezVousId;
+      } | {
+          heureDebut: string;
+          heureFin: string;
+          rdv: boolean;
+      })[]
+  }[] | undefined;
 }

@@ -24,7 +24,7 @@ export class UserService implements IService<userDTO>{
         })
     }
 
-    async create(user: userTypes): Promise<userDTO | null> {
+    async create(user: userId): Promise<userDTO | null> {
         return this.userRepository.create(user).then(userDTO => {
             if(userDTO === null) return null;
             return userDTO
@@ -37,7 +37,7 @@ export class UserService implements IService<userDTO>{
         })
     }
 
-    async update(user: userTypes, id: number): Promise<number |boolean> {
+    async update(user: userId, id: number): Promise<number |boolean> {
         return this.userRepository.update(user,id).then(good => good)
     }
 }

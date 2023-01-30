@@ -1,5 +1,5 @@
 import { JourDTO } from "../DTO/jour.dto";
-import { PlanningDTO, PlanningFullDTO } from "../DTO/planning.dto";
+import { PlanningComplet, PlanningDTO, PlanningFullDTO } from "../DTO/planning.dto";
 import { planningId } from "../types/planning";
 
 export class PlanningMapper {
@@ -31,6 +31,19 @@ export class PlanningMapper {
                 }
                 return objet
             })
+        }
+
+        return dto;
+    }
+
+
+
+
+    static mapToDtoPlanningFinal(planning: any): PlanningComplet | null {
+        if (planning === null) return null;
+        const dto: PlanningComplet = {
+            name: planning.name,
+            days: planning.days
         }
 
         return dto;

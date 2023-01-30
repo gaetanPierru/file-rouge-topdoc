@@ -3,6 +3,7 @@ import { PlanningFullDTO } from "../DTO/planning.dto";
 import User, { Conge, Jour, Planning, RendezVous } from "../database/connect";
 import { PlanningMapper } from "../mapper/planning.mapper";
 import { Op } from "sequelize";
+import { CongeMapper } from "../mapper/conge.mapper";
 
 export class PlanningDayRepository implements IRepositoryPlanning<PlanningFullDTO> {
     async findById(id: number): Promise<any | null> {
@@ -24,7 +25,7 @@ export class PlanningDayRepository implements IRepositoryPlanning<PlanningFullDT
                 activiteId: planningJour.activiteId,
                 date_fin: { [Op.gte]: new Date() }
             }
-        })
+        }).then((conges: any) =>  conges.map((conge: any) => CongeMapper.mapToDto(conge)) )
 
         const rdv: any = await RendezVous.findAll({
             where: {

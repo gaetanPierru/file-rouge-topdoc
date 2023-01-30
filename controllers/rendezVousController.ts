@@ -71,7 +71,7 @@ rendezVousController.delete("/:id", rdvHandler.deleteRendezVous)
   *         in: body
   *         required: true
   *         type: object
-  *         default: {"planningId": 1,"date_rendez_vous": "2022-12-22T08:07:27.834Z","duree_rendez_vous": 30}
+  *         default: {"planningId": 1,"date_rendez_vous": "2022-12-22T08:07:27.834Z","duree_rendez_vous": 30, "UserId": 1}
   *      responses:
   *        200:
   *          description: Create a new user.

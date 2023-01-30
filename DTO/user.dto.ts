@@ -1,4 +1,5 @@
 export interface userDTO {
+    id: number,
     nom: string,
     prenom: string,
     genre: string,
